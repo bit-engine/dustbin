@@ -13,14 +13,4 @@ defmodule Dustbin.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Dustbin do
-    pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
-  end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Dustbin do
-  #   pipe_through :api
-  # end
 end
