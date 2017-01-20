@@ -7,7 +7,8 @@ defmodule Core.Model do
       import Ecto.Query
 
       alias Core.{
-        CollectType 
+        CollectType,
+        Repo
       }
     end
   end
