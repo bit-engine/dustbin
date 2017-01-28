@@ -5,8 +5,8 @@ defmodule Dustbin.Mixfile do
     [apps_path: "apps",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Dependencies can be Hex packages:
