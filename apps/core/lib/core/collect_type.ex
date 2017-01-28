@@ -4,6 +4,7 @@ defmodule Core.CollectType do
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "collect_types" do
     field :type, :string
+    has_many :collection_schedules, CollectionSchedule
 
     timestamps()
   end

@@ -9,6 +9,7 @@ defmodule Core.SupportedLocation do
     field :province_or_state, :string
     field :country, :string
     field :country_code, :string
+    has_many :collection_schedules, CollectionSchedule
     
     timestamps()
   end
