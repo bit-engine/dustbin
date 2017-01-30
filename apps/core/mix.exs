@@ -21,7 +21,7 @@ defmodule Core.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:ecto, :postgrex, :logger],
-     mod: {Core, []}]
+     mod: {Core.Application, []}]
   end
 
   # Dependencies can be Hex packages:
