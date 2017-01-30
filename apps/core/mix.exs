@@ -12,8 +12,8 @@ defmodule Core.Mixfile do
      elixirc_paths: elixirc_paths(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application
@@ -41,6 +41,7 @@ defmodule Core.Mixfile do
     [
       {:ecto, "~> 2.1"},
       {:postgrex, ">= 0.0.0"},
+      {:ex_machina, "~> 1.0", only: :test},
     ]
   end
 

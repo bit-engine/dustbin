@@ -9,6 +9,7 @@ defmodule Core.Model do
       alias Core.{
         CollectType,
         SupportedLocation,
+        CollectionSchedule,
         Repo
       }
     end
