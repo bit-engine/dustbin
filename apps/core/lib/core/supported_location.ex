@@ -2,7 +2,6 @@ defmodule Core.SupportedLocation do
   use Core.Model
 
   @fields [:city, :province_or_state, :country, :country_code] 
-  @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "supported_locations" do
     field :city, :string
