@@ -9,6 +9,7 @@ defmodule Core.Case do
       import Ecto.Changeset
       import Ecto.Query
       import Core.Case
+      import Core.Factory
 
       use Core.Model
     end

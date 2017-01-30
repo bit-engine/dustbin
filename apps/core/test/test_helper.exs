@@ -4,4 +4,4 @@ ExUnit.start()
 Ecto.Adapters.SQL.Sandbox.mode(Core.Repo, :manual)
 
 #Start ex_machina
-{:ok, _} = Application.ensure_all_stated(:ex_machina)
+{:ok, _} = Application.ensure_all_started(:ex_machina)
