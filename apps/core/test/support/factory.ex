@@ -11,7 +11,6 @@ defmodule Core.Factory do
   def collection_schedule_factory do
     %CollectionSchedule{
       scheduled_date: ~D[2017-01-01],
-      utc_offset: "UTC-5:00",
       collect_type: build(:collect_type),
       supported_location: build(:supported_location)
     }

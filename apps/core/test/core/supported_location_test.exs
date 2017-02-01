@@ -5,7 +5,8 @@ defmodule Core.SuppotedLocationTest do
     city: "Buenos Aires",
     province_or_state: "Buenos Aires",
     country: "Argentina",
-    country_code: "AR"
+    country_code: "AR",
+    timezone: "America/Argentina/Buenos_Aires"
   }
 
   test "changeset with valid attributes" do
