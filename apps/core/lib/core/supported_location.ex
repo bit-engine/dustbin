@@ -1,13 +1,14 @@
 defmodule Core.SupportedLocation do
   use Core.Model
 
-  @fields [:city, :province_or_state, :country, :country_code] 
+  @fields [:city, :province_or_state, :country, :country_code, :timezone] 
 
   schema "supported_locations" do
     field :city, :string
     field :province_or_state, :string
     field :country, :string
     field :country_code, :string
+    field :timezone, :string
     has_many :collection_schedules, CollectionSchedule
     
     timestamps()
