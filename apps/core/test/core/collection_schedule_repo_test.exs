@@ -29,7 +29,7 @@ defmodule Core.CollectionScheduleRepoTest do
     result = List.first(CollectionSchedule.upcoming(montreal))
     assert result.id == expected.id
     assert result.scheduled_date == expected.scheduled_date
-    assert result.id == expected.id
+    assert result.collect_type == expected.collect_type
   end
 
   test "given no collections schedules for the next day, upcoming/1 should return []" do
