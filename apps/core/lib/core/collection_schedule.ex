@@ -20,13 +20,17 @@ defmodule Core.CollectionSchedule do
   end
 
   def upcoming(%SupportedLocation{} = location) do
-    tomorrow = Timex.now(location.timezone) |> Timex.to_date |> Timex.shift(days: 1)
-    location_schedules = assoc(location, :collection_schedules)
-    
+    location_schedules = assoc(location, :collection_schedules) 
     upcoming = from sch in location_schedules,
-      where: sch.scheduled_date == ^tomorrow,
+      where: sch.scheduled_date == ^tomorrow(location.timezone),
       preload: [:collect_type]
 
     Repo.all upcoming
+  end
+
+  defp tomorrow(timezone) do
+    Timex.now(timezone)
+    |> Timex.to_date
+    |> Timex.shift(days: 1)
   end
 end
