@@ -1,5 +1,7 @@
 defmodule Core.CollectionSchedule do
   use Core.Model
+  import Ecto, only: [assoc: 2]
+  use Timex
 
   @fields [:scheduled_date]
 
@@ -15,5 +17,20 @@ defmodule Core.CollectionSchedule do
     collection_schedule
     |> cast(params, @fields)
     |> validate_required(@fields)
+  end
+
+  def upcoming(%SupportedLocation{} = location) do
+    location_schedules = assoc(location, :collection_schedules) 
+    upcoming = from sch in location_schedules,
+      where: sch.scheduled_date == ^tomorrow(location.timezone),
+      preload: [:collect_type]
+
+    Repo.all upcoming
+  end
+
+  defp tomorrow(timezone) do
+    Timex.now(timezone)
+    |> Timex.to_date
+    |> Timex.shift(days: 1)
   end
 end
