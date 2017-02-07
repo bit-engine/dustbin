@@ -5,6 +5,7 @@ defmodule Core.Factory do
     CollectType,
     SupportedLocation,
     CollectionSchedule,
+    Subscription
   }
 
 
@@ -24,5 +25,15 @@ defmodule Core.Factory do
 
   def supported_location_factory do
     %SupportedLocation{}
+  end
+
+  def subscription_factory do
+    %Subscription{
+      supported_location: build(:supported_location),
+      collect_type: build(:collect_type),
+      user_id: "9999",
+      active: true,
+      lang: "en"
+    }
   end
 end
