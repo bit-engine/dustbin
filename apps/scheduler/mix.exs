@@ -15,7 +15,7 @@ defmodule Scheduler.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:quantum, :logger],
+    [extra_applications: [:quantum, :core, :logger],
      mod: {Scheduler.Application, []}]
   end
 
@@ -30,7 +30,8 @@ defmodule Scheduler.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:quantum, ">= 1.8.1"}
+      {:quantum, ">= 1.8.1"},
+      {:core, in_umbrella: true}
     ]
   end
 end
