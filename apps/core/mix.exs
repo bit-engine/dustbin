@@ -20,7 +20,7 @@ defmodule Core.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:ecto, :postgrex, :logger],
+    [applications: [:ecto, :postgrex, :timex, :logger],
      mod: {Core, []}]
   end
 
@@ -42,6 +42,7 @@ defmodule Core.Mixfile do
       {:ecto, "~> 2.1"},
       {:postgrex, ">= 0.0.0"},
       {:ex_machina, "~> 1.0", only: :test},
+      {:timex, "~> 3.0"}
     ]
   end
 
