@@ -1,14 +1,15 @@
-defmodule Scheduler.Proxy.Supervisor do
+defmodule Scheduler.Supervisor do
   use Supervisor
 
-  def start_link() do
-    Supervisor.start_link(__MODULE__, [], name: __MODULE__)
+  def start_link(state) do
+    Supervisor.start_link(__MODULE__, state, name: __MODULE__)
   end
 
-  def init(_opts) do
+  def init(state) do
     children = [
-      worker(Scheduler.Proxy, [], restart: :temporary)
+      supervisor(Task.Supervisor, [[name: Scheduler.TasksSupervisor]]),
+      worker(Scheduler, [state], restart: :temporary)
     ]
-    supervise children, strategy: :simple_one_for_one
+    supervise children, strategy: :one_for_one
   end
 end

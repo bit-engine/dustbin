@@ -1,18 +1,11 @@
 defmodule Scheduler do
-  @moduledoc """
-  Documentation for Scheduler.
-  """
+  use GenServer
 
-  @doc """
-  Hello world.
+  def start_link(state) do
+    GenServer.start_link(__MODULE__, state, name: __MODULE__)
+  end
 
-  ## Examples
-
-      iex> Scheduler.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def init(state) do
+    {:ok, state}
   end
 end
