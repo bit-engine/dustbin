@@ -20,7 +20,7 @@ defmodule Scheduler.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:quantum, :core, :logger],
+    [applications: [:quantum, :timex, :core, :logger],
      mod: {Scheduler.Application, []}]
   end
 
@@ -40,6 +40,7 @@ defmodule Scheduler.Mixfile do
   defp deps do
     [
       {:quantum, ">= 1.8.1"},
+      {:timex, "~> 3.0"},
       {:core, in_umbrella: true}
     ]
   end
