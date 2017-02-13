@@ -6,17 +6,42 @@ defmodule Scheduler do
     GenServer.start_link(__MODULE__, state, name: __MODULE__)
   end
 
-  def pick_locations do
-    locations = Core.supported_locations 
-    Enum.find(locations, fn loc -> noon?(loc) end)
+  def spawn_notification_tasks do
+    GenServer.cast(__MODULE__, :spawn_notification_tasks)
   end
+ 
 
-  defp noon?(location) do
-    {_, {hour, _, _}} = Timex.to_erl(Timex.now(location.timezone))
-    hour == 12
-  end
 
   def init(state) do
-    {:ok, state}
+    {
+      Quantum.add_job("@hourly", fn -> spawn_notification_tasks() end),
+      state
+    }
   end
+
+  def handle_cast(:spawn_notification_tasks, state) do
+    # Enum.each(pick_locations(),
+    #  fn (location) ->
+    #    Task.Supervisor.async_nolink(Scheduler.TasksSupervisor, Messenger, :notify, [location])
+    # end
+    # )
+    {:noreply, state} 
+  end
+
+  defp pick_locations do
+    Core.supported_locations
+    |> Enum.find(fn loc -> noon?(loc) end)
+  end
+
+  defp noon?(location = %Core.SupportedLocation{}) do
+    erl_datetime = 
+      location.timezone
+      |> Timex.now
+      |> Timex.to_erl
+
+    noon? erl_datetime
+  end
+  
+  defp noon?({_, {12, _, _}}), do: true
+  defp noon?(_), do: false
 end
