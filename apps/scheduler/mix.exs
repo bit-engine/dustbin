@@ -1,8 +1,8 @@
-defmodule Core.Mixfile do
+defmodule Scheduler.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :core,
+    [app: :scheduler,
      version: "0.1.0",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -20,8 +20,8 @@ defmodule Core.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:ecto, :postgrex, :timex, :logger],
-     mod: {Core.Application, []}]
+    [applications: [:quantum, :timex, :core, :logger],
+     mod: {Scheduler.Application, []}]
   end
 
   # Dependencies can be Hex packages:
@@ -39,10 +39,9 @@ defmodule Core.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:ecto, "~> 2.1"},
-      {:postgrex, ">= 0.0.0"},
-      {:ex_machina, "~> 1.0", only: :test},
-      {:timex, "~> 3.0"}
+      {:quantum, ">= 1.8.1"},
+      {:timex, "~> 3.0"},
+      {:core, in_umbrella: true}
     ]
   end
 
