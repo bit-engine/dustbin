@@ -10,8 +10,6 @@ defmodule Scheduler do
     GenServer.cast(__MODULE__, :spawn_notification_tasks)
   end
  
-
-
   def init(state) do
     {
       Quantum.add_job("@hourly", fn -> spawn_notification_tasks() end),
