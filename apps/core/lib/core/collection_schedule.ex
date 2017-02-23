@@ -1,5 +1,5 @@
 defmodule Core.CollectionSchedule do
-  use Core.Model
+  use Core.Model, :schema
   import Ecto, only: [assoc: 2]
   use Timex
 

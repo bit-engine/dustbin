@@ -1,5 +1,5 @@
 defmodule Core.CollectType do 
-  use Core.Model
+  use Core.Model, :schema
   
   schema "collect_types" do
     field :type, :string

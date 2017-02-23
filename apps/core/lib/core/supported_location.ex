@@ -1,5 +1,5 @@
 defmodule Core.SupportedLocation do
-  use Core.Model
+  use Core.Model, :schema
 
   @fields [:city, :province_or_state, :country, :country_code, :timezone] 
 
