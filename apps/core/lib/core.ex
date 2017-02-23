@@ -9,7 +9,7 @@ defmodule Core do
   """
   def supported_locations, do: Repo.all(SupportedLocation)
   
-  @doc"""
+  @doc """
   Returns the next collects for a specific location.
   This function serves only as a wrapper around `CollectionSchedule.upcoming/1`
   """
