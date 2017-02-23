@@ -26,7 +26,13 @@ defmodule Core.CollectionScheduleRepoTest do
     insert(:collection_schedule, scheduled_date: today(montreal.timezone), collect_type: collect_type, supported_location: montreal)
     insert(:collection_schedule, scheduled_date: yesterday(montreal.timezone), collect_type: collect_type, supported_location: montreal)
     
-    result = List.first(CollectionSchedule.upcoming(montreal))
+    # Core.upcoming_collects/1 should be equivalent to CollectionSchedule.upcoming/1
+    # so by doing the following, we're testing both
+    result =
+      montreal
+      |> Core.upcoming_collects
+      |> Enum.at 0
+
     assert result.id == expected.id
     assert result.scheduled_date == expected.scheduled_date
     assert result.collect_type == expected.collect_type
@@ -39,7 +45,10 @@ defmodule Core.CollectionScheduleRepoTest do
     insert(:collection_schedule, scheduled_date: day_after_tomorrow, collect_type: collect_type, supported_location: montreal)
     insert(:collection_schedule, scheduled_date: yesterday(montreal.timezone), collect_type: collect_type, supported_location: montreal)
     
-    assert CollectionSchedule.upcoming(montreal) == []
+    # Core.upcoming_collects/1 should be equivalent to CollectionSchedule.upcoming/1
+    # so by doing the following, we're testing both
+    result = Core.upcoming_collects(montreal)
+    assert Enum.empty? result
   end
 
   defp today(timezone) do

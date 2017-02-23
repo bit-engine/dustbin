@@ -19,6 +19,11 @@ defmodule Core.CollectionSchedule do
     |> validate_required(@fields)
   end
 
+  @doc """
+  Returns the next collects for a specific location.
+  This function will query the database and look for all entries where the scheduled date
+  equals exactly one day after today's date in the location's timezone. 
+  """
   def upcoming(%SupportedLocation{} = location) do
     location_schedules = assoc(location, :collection_schedules) 
     upcoming = from sch in location_schedules,
