@@ -1,4 +1,6 @@
 defmodule Core.CollectType do 
+  @moduledoc false
+
   use Core.Model, :schema
   
   schema "collect_types" do

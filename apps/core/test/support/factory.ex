@@ -1,4 +1,8 @@
 defmodule Core.Factory do
+  @moduledoc """
+  Defines required factories in tests
+  """
+
   use ExMachina.Ecto, repo: Core.Repo
 
   alias Core.{

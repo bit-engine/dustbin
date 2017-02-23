@@ -1,4 +1,6 @@
 defmodule Core.Subscription do
+  @moduledoc false 
+
   use Core.Model, :schema
 
   @fields [:user_id, :active, :lang]

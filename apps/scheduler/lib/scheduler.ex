@@ -1,4 +1,9 @@
 defmodule Scheduler do
+  @moduledoc """
+  This module serves as a notification task dispatcher.
+  A Quantum job will execute `spawn_notification_tasks` every certain amount of time (normally every hour).
+  """
+
   use GenServer
   use Timex
 
@@ -26,11 +31,18 @@ defmodule Scheduler do
     {:noreply, state} 
   end
 
+  @doc """
+  Returns all supported locations in which it's noon, using the location's timezone
+  """
   defp pick_locations do
     Core.supported_locations
     |> Enum.find(fn loc -> noon?(loc) end)
   end
 
+  @doc """
+  For a given location, it verifies if it's noon in the location's timezone
+  relative to the moment of execution of the function
+  """
   defp noon?(location = %Core.SupportedLocation{}) do
     erl_datetime = 
       location.timezone

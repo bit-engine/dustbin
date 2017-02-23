@@ -1,7 +1,10 @@
 defmodule Core.CollectionSchedule do
+  @moduledoc false
+
   use Core.Model, :schema
-  import Ecto, only: [assoc: 2]
   use Timex
+  
+  import Ecto, only: [assoc: 2]
 
   @fields [:scheduled_date]
 
