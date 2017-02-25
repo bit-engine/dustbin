@@ -28,7 +28,6 @@ defmodule Scheduler do
     #    Task.Supervisor.async_nolink(Scheduler.TasksSupervisor, Messenger, :notify, [location])
     # end
     # )
-    IO.inspect pick_locations()    
     {:noreply, state} 
   end
 
