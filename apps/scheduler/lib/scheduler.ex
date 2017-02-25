@@ -28,21 +28,18 @@ defmodule Scheduler do
     #    Task.Supervisor.async_nolink(Scheduler.TasksSupervisor, Messenger, :notify, [location])
     # end
     # )
+    IO.inspect pick_locations()    
     {:noreply, state} 
   end
 
-  @doc """
-  Returns all supported locations in which it's noon, using the location's timezone
-  """
+  # Returns all supported locations in which it's noon, using the location's timezone
   defp pick_locations do
     Core.supported_locations
-    |> Enum.find(fn loc -> noon?(loc) end)
+    |> Enum.take_while(&noon?/1)
   end
 
-  @doc """
-  For a given location, it verifies if it's noon in the location's timezone
-  relative to the moment of execution of the function
-  """
+  # For a given location, it verifies if it's noon in the location's timezone
+  # relative to the moment of execution of the function 
   defp noon?(location = %Core.SupportedLocation{}) do
     erl_datetime = 
       location.timezone
