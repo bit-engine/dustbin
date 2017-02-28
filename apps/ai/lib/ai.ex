@@ -17,7 +17,7 @@ defmodule AI do
   end
 
   def process(raw_text, sender) do
-    %{session_id: session_id, context: context} = create_session sender
+    {session_id, %{context: context}} = create_session sender
     GenServer.call(__MODULE__, {:process, raw_text, session_id, context})
   end
 
@@ -37,15 +37,13 @@ defmodule AI do
     {:noreply, state}
   end
 
-  # TODO: Refactor out handle_call response by getting out the state from case
-  #       new_state = 
-  #         case Map.get(...)
   def handle_call({:create_session, sender}, _from, state) do
-    case Map.get(state, sender) do
-      result when is_map(result) -> {:reply, result, state}
+    case Enum.find(state, fn {_, v} -> v.fbid == sender end) do
+      {session_id, session} = result -> {:reply, result, state}
       nil ->
-        session = %{session_id: "#{sender}-#{unix_timestamp()}", context: %{sender: sender}}
-        {:reply, session, Map.put(state, sender, session)}
+        session_id = "#{sender}-#{unix_timestamp()}"
+        session_value = %{fbid: sender, context: %{}}
+        {:reply, {session_id, session_value}, Map.put(state, session_id, session_value)}
     end
   end
 
