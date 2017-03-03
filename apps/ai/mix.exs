@@ -16,8 +16,7 @@ defmodule AI.Mixfile do
   end
 
   def application do
-    # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger],
+    [applications: [:logger],
      mod: {AI.Application, []}]
   end
 
