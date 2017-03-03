@@ -26,9 +26,10 @@ defmodule AI.Mixfile do
     ]
   end
 
-  # Hacky workaround here; when running `mix test` from
-  # umbrella, the alias apparently gets ignored, so I have to explicitly
-  # stop the application and execute it again.
+  # When running tests from the root of an umbrella,
+  # test --no-start doesn't work, at this point the application
+  # has already been started, so the best approach is to stop it 
+  # and pass the --no-start option after
   defp aliases do
     [
       "test": [fn _ -> Application.stop(:ai) end, "test --no-start"]
