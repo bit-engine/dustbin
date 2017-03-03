@@ -1,4 +1,4 @@
 use Mix.Config
 
 config :ai,
-  wit_access_token: Path.join([__DIR__, "tokens.txt"]) |> File.read! |> String.trim
+  wit_access_token: System.get_env("WIT_ACCESS_TOKEN")
