@@ -78,9 +78,17 @@ defmodule AITest do
     session_id = "some-session-id"
     current_state = %{session_id => %{context: %{}, fbid: 123, tasks: []}}
     
-    {:noreply, new_state} = AI.handle_call({:process, "foo bar", session_id, %{}}, AI, current_state)
+    {:noreply, new_state} = AI.handle_cast({:process, "foo bar", session_id, %{}}, current_state)
     %{^session_id => %{context: %{}, tasks: [h | _], fbid: 123}} = new_state
     assert is_reference(h)
+  end
+
+  test "AI should receive {:ok, context} when a wit task is done" do
+    ai = Process.whereis AI
+    :erlang.trace(ai, true, [:receive])
+    AI.process("Foo bar", 123)
+    
+    assert_receive {:trace, ^ai, :receive, {_, {:ok, %{random_key: :random_value}}}}
   end
 
   defp assert_down(pid) do

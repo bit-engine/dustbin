@@ -19,7 +19,7 @@ defmodule AI do
 
   def process(raw_text, sender) do
     {session_id, %{context: context}} = create_session sender
-    GenServer.call(__MODULE__, {:process, raw_text, session_id, context})
+    GenServer.cast(__MODULE__, {:process, raw_text, session_id, context})
   end
 
   def create_session(sender) do
@@ -33,7 +33,7 @@ defmodule AI do
     {:ok, state}
   end
 
-  def handle_call({:process, raw_text, session_id, context}, _from, state) do
+  def handle_cast({:process, raw_text, session_id, context}, state) do
     task = Task.Supervisor.async_nolink(AI.TaskSupervisor, fn -> run_actions(raw_text, session_id, context) end)  
     new_state = add_task_to_session(state, session_id, task)
     {:noreply, new_state}
@@ -41,7 +41,7 @@ defmodule AI do
 
   def handle_call({:create_session, sender}, _from, state) do
     case Enum.find(state, fn {_, v} -> v.fbid == sender end) do
-      {session_id, session} = result -> {:reply, result, state}
+      {_, _} = result -> {:reply, result, state}
       nil ->
         session_id = "#{sender}-#{unix_timestamp()}"
         session_value = %{fbid: sender, context: %{}, tasks: []}
@@ -52,7 +52,7 @@ defmodule AI do
   def handle_info({ref, {:ok, context}}, state) do
     new_state = 
       case Enum.find(state, &session_contains_task?(&1, ref)) do
-        {session_id, session} ->
+        {session_id, _} ->
           if Map.has_key?(context, :done) do
             remove_session(state, session_id)
           else
@@ -63,6 +63,8 @@ defmodule AI do
       end
     {:noreply, new_state}
   end
+
+  def handle_info({:DOWN, _, _, _, _}, state), do: {:noreply, state}
 
   # Private/Helper functions
 
