@@ -16,7 +16,7 @@ defmodule AITest do
     {_, %{context: %{}, fbid: ^sender, tasks: []}} = AI.create_session sender
   end
 
-  test "AI should not create a session when a sender has a existing valid one" do
+  test "AI should not create a session when a sender has an existing valid one" do
     state = %{"some-session-id" => %{fbid: 123, context: %{}, tasks: []}}
     {:reply, result, new_state} = AI.handle_call({:create_session, 123}, AI, state)
 
@@ -89,6 +89,13 @@ defmodule AITest do
     AI.process("Foo bar", 123)
     
     assert_receive {:trace, ^ai, :receive, {_, {:ok, %{random_key: :random_value}}}}
+  end
+
+  test "Retrieving an existing session" do
+    current_state = %{
+      "session-id" => %{}
+    }
+    {:reply, %{}, ^current_state} = AI.handle_call({:get_session, "session-id"}, AI, current_state)
   end
 
   defp assert_down(pid) do

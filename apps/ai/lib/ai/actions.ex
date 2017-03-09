@@ -17,6 +17,6 @@ defmodule AI.Actions do
   end
 
   defaction verify_subscription(session, context, message) do
-      
+
   end
 end

@@ -17,6 +17,10 @@ defmodule AI do
     GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end
 
+  def get_session(session_id) do
+    GenServer.call(__MODULE__, {:get_session, session_id})
+  end
+
   def process(raw_text, sender) do
     {session_id, %{context: context}} = create_session sender
     GenServer.cast(__MODULE__, {:process, raw_text, session_id, context})
@@ -37,6 +41,10 @@ defmodule AI do
     task = Task.Supervisor.async_nolink(AI.TaskSupervisor, fn -> run_actions(raw_text, session_id, context) end)  
     new_state = add_task_to_session(state, session_id, task)
     {:noreply, new_state}
+  end
+
+  def handle_call({:get_session, session_id}, _from, state) do
+    {:reply, state[session_id], state}
   end
 
   def handle_call({:create_session, sender}, _from, state) do
