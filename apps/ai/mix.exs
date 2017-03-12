@@ -23,6 +23,7 @@ defmodule AI.Mixfile do
   defp deps do
     [
       {:elixir_wit, "~> 1.0.0"},
+      {:core, in_umbrella: true}  
     ]
   end
 
