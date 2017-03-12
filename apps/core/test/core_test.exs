@@ -9,4 +9,10 @@ defmodule CoreTest do
     result = Core.supported_locations
     assert length(result) == 3
   end
+
+  test "returns if a user_is is subscribed" do
+    insert(:subscription, user_id: "1234")
+    assert Core.is_subscribed? "1234"
+    refute Core.is_subscribed? "456"
+  end
 end
