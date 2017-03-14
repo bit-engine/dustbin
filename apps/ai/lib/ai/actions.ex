@@ -37,12 +37,17 @@ defmodule AI.Actions do
   end
 
   defaction check_location_support(session, context, %WitConverse{entities: %{"location" => [%{"value" => location} | _]}}) do
-    location_value = Map.get(location, "value")
-    [city, country] = String.split(location_value, ",")
-
-    case Repo.get_by(SupportedLocation, city: city, country: country) do
-      %SupportedLocation{} -> Map.merge(context, %{location: location_value, location_supported: true})
-      nil -> Map.merge(context, %{location: location_value, location_not_supported: true})
+    if [city, country] = String.split(location, ",") do
+      case Repo.get_by(SupportedLocation, city: city, country: country) do
+        %SupportedLocation{} -> Map.merge(context, %{location: location, location_supported: true})
+        nil -> Map.merge(context, %{location: location, location_not_supported: true})
+      end
+    else
+      Map.merge(context, %{location: location, location_not_supported: true})
     end
+  end
+
+  defaction end_conversation(session, context, _message) do
+    Map.put(context, :done, true)
   end
 end

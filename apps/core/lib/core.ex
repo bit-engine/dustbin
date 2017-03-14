@@ -18,7 +18,7 @@ defmodule Core do
   end
 
   def is_subscribed?(user_id) do
-    not (Repo.get_by(Subscription, user_id: user_id)
+    not (Repo.get_by(Subscription, user_id: "#{user_id}")
         |> is_nil)
   end
 end
