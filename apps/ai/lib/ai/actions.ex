@@ -4,13 +4,16 @@ defmodule AI.Actions do
   """
 
   @temp "John Doe"
+
   alias Core.SupportedLocation
   alias Core.Repo
   alias Wit.Models.Response.Converse, as: WitConverse
+
   use Wit.Actions
 
   def say(session, context, message) do
     # Send Message to user in FB
+    # Must check for quick replies here if any in context
   end
 
   def merge(session, context, %WitConverse{entities: %{"location" => [%{"value" => location} | _]}}) do
