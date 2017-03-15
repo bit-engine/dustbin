@@ -16,7 +16,7 @@ defmodule AI.Mixfile do
   end
 
   def application do
-    [applications: [:logger],
+    [applications: [:logger, :elixir_wit],
      mod: {AI.Application, []}]
   end
 
