@@ -17,8 +17,18 @@ defmodule Core do
     CollectionSchedule.upcoming(location)
   end
 
+  @doc """
+  Returns true if the user is subscribed to Dustbin's notifications false otherwise
+  """
   def is_subscribed?(user_id) do
     not (Repo.get_by(Subscription, user_id: "#{user_id}")
         |> is_nil)
+  end
+
+  @doc """
+  Subscribes a user to Dustbin's notifications.
+  This function will create an entry in subscriptions relation
+  """
+  def subscribe(user_id) do
   end
 end
