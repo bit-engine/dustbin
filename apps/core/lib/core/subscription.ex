@@ -10,7 +10,6 @@ defmodule Core.Subscription do
     field :active, :boolean
     field :lang, :string
     belongs_to :supported_location, SupportedLocation
-    belongs_to :collect_type, CollectType
 
     timestamps()
   end

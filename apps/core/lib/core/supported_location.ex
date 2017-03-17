@@ -12,6 +12,7 @@ defmodule Core.SupportedLocation do
     field :country_code, :string
     field :timezone, :string
     has_many :collection_schedules, CollectionSchedule
+    has_many :subscriptions, Subscription
     
     timestamps()
   end
