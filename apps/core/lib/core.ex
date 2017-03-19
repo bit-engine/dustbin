@@ -28,7 +28,9 @@ defmodule Core do
   @doc """
   Subscribes a user to Dustbin's notifications.
   This function will create an entry in subscriptions relation
+  Serves as  wrapper on `Subscription.create/2`
   """
-  def subscribe(user_id) do
+  def subscribe(user_id, location_id) do
+    Subscription.create(user_id, location_id)
   end
 end
