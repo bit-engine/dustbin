@@ -39,6 +39,8 @@ defmodule AI.Actions do
     Map.put(context, :quick_replies, quick_replies)  
   end
 
+  # TODO
+  # - Remove direct repo access
   defaction check_location_support(session, context, %WitConverse{entities: %{"location" => [%{"value" => location} | _]}}) do
     if [city, country] = String.split(location, ",") do
       case Repo.get_by(SupportedLocation, city: city, country: country) do
@@ -47,6 +49,16 @@ defmodule AI.Actions do
       end
     else
       Map.merge(context, %{location: location, location_not_supported: true})
+    end
+  end
+
+  def subscribe(session, context, _message) do
+    location = Map.get(context, "location")
+    %{fbid: user_id} = AI.get_session(session)
+    if {:ok, _} = Core.subscribe(user_id, location.id) do
+      Map.merge(context, %{user_subscribed: true})
+    else
+      Map.merge(context, %{user_not_subscribed: true})
     end
   end
 
