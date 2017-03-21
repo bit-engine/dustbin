@@ -41,6 +41,7 @@ defmodule AI.Actions do
 
   # TODO
   # - Remove direct repo access
+  # - Replace if [match] by case
   defaction check_location_support(_session, context, %WitConverse{entities: %{"location" => [%{"value" => location} | _]}}) do
     if [city, country] = String.split(location, ~r{, }) do
       case Repo.get_by(SupportedLocation, city: city, country: country) do
