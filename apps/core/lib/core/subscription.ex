@@ -19,6 +19,7 @@ defmodule Core.Subscription do
     |> cast(params, @fields)
     |> validate_required(@fields)
     |> unique_constraint(:user_id)
+    |> foreign_key_constraint(:supported_location_id)
   end
 
   def create(user_id, location_id) do
