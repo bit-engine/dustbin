@@ -46,7 +46,16 @@ defmodule AI.ActionsTest do
     location = Core.Repo.insert! %Core.SupportedLocation{city: "Montreal", country: "Canada"}
     message = %WitConverse{entities: %{"location" => [%{"value" => "#{location.city}, #{location.country}"}]}}
     location_string = "#{location.city}, #{location.country}"
-    %{location: ^location_string, location_supported: true} = AI.Actions.check_location_support(nil, %{}, message)
+    location_id = location.id
+    %{location: ^location_string, location_supported: true, location_id: ^location_id} = AI.Actions.check_location_support(nil, %{}, message)
+  end
+
+  test "given a city and a country that are non existent or not supported context is updated" do 
+    message = %WitConverse{entities: %{"location" => [%{"value" => "Random message"}]}}
+    %{location: "Random message", location_not_supported: true} = AI.Actions.check_location_support(nil, %{}, message)
+  
+    some_other_message = %WitConverse{entities: %{"location" => [%{"value" => "Toronto, Canada"}]}}
+    %{location: "Toronto, Canada", location_not_supported: true} = AI.Actions.check_location_support(nil, %{}, some_other_message)
   end
 
   test "performs a user subscription" do

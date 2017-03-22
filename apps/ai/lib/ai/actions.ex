@@ -41,15 +41,15 @@ defmodule AI.Actions do
 
   # TODO
   # - Remove direct repo access
-  # - Replace if [match] by case
   defaction check_location_support(_session, context, %WitConverse{entities: %{"location" => [%{"value" => location} | _]}}) do
-    if [city, country] = String.split(location, ~r{, }) do
-      case Repo.get_by(SupportedLocation, city: city, country: country) do
-        %SupportedLocation{id: id} -> Map.merge(context, %{location: location, location_supported: true, location_id: id})
-        nil -> Map.merge(context, %{location: location, location_not_supported: true})
-      end
-    else
-      Map.merge(context, %{location: location, location_not_supported: true})
+    case String.split(location, ~r{, }) do
+      [city, country] ->
+        case Repo.get_by(SupportedLocation, city: city, country: country) do
+          %SupportedLocation{id: id} -> Map.merge(context, %{location: location, location_supported: true, location_id: id})
+          nil -> Map.merge(context, %{location: location, location_not_supported: true})
+        end
+      _ ->
+        Map.merge(context, %{location: location, location_not_supported: true})
     end
   end
 
