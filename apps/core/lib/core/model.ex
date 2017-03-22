@@ -29,6 +29,7 @@ defmodule Core.Model do
         CollectType,
         SupportedLocation,
         CollectionSchedule,
+        Subscription,
         Repo
       }
     end
@@ -45,6 +46,7 @@ defmodule Core.Model do
         CollectType,
         SupportedLocation,
         CollectionSchedule,
+        Subscription,
         Repo
       }
 

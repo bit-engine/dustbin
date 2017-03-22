@@ -16,13 +16,16 @@ defmodule AI.Mixfile do
   end
 
   def application do
-    [applications: [:logger],
+    [applications: [:logger, :elixir_wit, :core],
      mod: {AI.Application, []}]
   end
 
   defp deps do
     [
       {:elixir_wit, "~> 1.0.0"},
+      {:ecto, "~> 2.1"},
+      {:postgrex, ">= 0.0.0"},
+      {:core, in_umbrella: true}  
     ]
   end
 

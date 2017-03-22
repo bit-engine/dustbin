@@ -10,7 +10,6 @@ defmodule Core.Subscription do
     field :active, :boolean
     field :lang, :string
     belongs_to :supported_location, SupportedLocation
-    belongs_to :collect_type, CollectType
 
     timestamps()
   end
@@ -19,6 +18,13 @@ defmodule Core.Subscription do
     subscription
     |> cast(params, @fields)
     |> validate_required(@fields)
+    |> unique_constraint(:user_id)
+    |> foreign_key_constraint(:supported_location_id)
   end
 
+  def create(user_id, location_id) do
+    params = %{user_id: user_id, active: true, lang: "EN"}
+    changeset = changeset(%Subscription{supported_location_id: location_id}, params)
+    Repo.insert changeset
+  end
 end
