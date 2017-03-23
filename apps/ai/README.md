@@ -1,19 +1,20 @@
 # AI
 
-**TODO: Add description**
+Defines actions and interactions with [Wit.ai](https://wit.ai/) API
 
-## Installation
+## Development mode
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ai` to your list of dependencies in `mix.exs`:
+When in development mode, ai app will look for `WIT_ACCESS_TOKEN` environment variable, the easiest way to add one is to:
 
-```elixir
-def deps do
-  [{:ai, "~> 0.1.0"}]
-end
+```bash
+
+touch .env
+
+vim .env
+
+# edit file and add the variable described above
+
+source .env
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ai](https://hexdocs.pm/ai).
 
