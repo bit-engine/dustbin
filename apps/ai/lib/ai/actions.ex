@@ -25,7 +25,7 @@ defmodule AI.Actions do
 
   defaction verify_subscription(session, context, _message) do
     %{fbid: id} = AI.get_session(session)
-    if Core.is_subscribed? id do
+    if Core.subscribed? id do
       Map.merge(context, %{is_subscribed: true, username: @temp})
     else
       Map.merge(context, %{not_subscribed: true, username: @temp})
@@ -59,6 +59,14 @@ defmodule AI.Actions do
     case Core.subscribe(user_id, location_id) do
       {:ok, _} -> Map.merge(context, %{user_subscribed: true})
       {:error, _} -> Map.merge(context, %{user_not_subscribed: true})
+    end
+  end
+
+  defaction unsubscribe(session, context, _message) do
+    %{fbid: user_id} = AI.get_session(session)
+    case Core.unsubscribe(user_id) do
+      {:ok, _} -> Map.merge(context, %{unsubscribed: true, username: @temp})
+      {:error, _} -> Map.merge(context, %{not_unsubscribed: true})
     end
   end
 

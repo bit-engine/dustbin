@@ -22,9 +22,23 @@ defmodule Core.Subscription do
     |> foreign_key_constraint(:supported_location_id)
   end
 
+  def subscribed?(user_id) do
+    q = from s in Subscription,
+          where: s.user_id == ^user_id and s.active == true
+
+    result = Repo.one(q)
+    not is_nil(result)
+  end
+
   def create(user_id, location_id) do
     params = %{user_id: user_id, active: true, lang: "EN"}
     changeset = changeset(%Subscription{supported_location_id: location_id}, params)
     Repo.insert changeset
+  end
+
+  def deactivate(user_id) do
+    subscription = Repo.get_by(Subscription, user_id: user_id)
+    subscription = change(subscription, active: false)
+    Repo.update subscription
   end
 end

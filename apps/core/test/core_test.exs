@@ -12,7 +12,12 @@ defmodule CoreTest do
 
   test "returns if a user_is is subscribed" do
     insert(:subscription, user_id: "1234")
-    assert Core.is_subscribed? "1234"
-    refute Core.is_subscribed? "456"
+    assert Core.subscribed? "1234"
+    refute Core.subscribed? "456"
+  end
+
+  test "deactivates an existent user subscription" do
+    insert(:subscription, user_id: "1234")
+    {:ok, %Subscription{active: false}} = Core.unsubscribe "1234"
   end
 end
