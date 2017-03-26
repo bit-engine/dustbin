@@ -15,7 +15,7 @@ defmodule AI.ActionsTest do
     {session_id, _} = AI.create_session("999")
     %{not_subscribed: true} = AI.Actions.verify_subscription(session_id, %{}, nil) 
 
-    Core.Repo.insert! %Core.Subscription{user_id: "1234"}
+    Core.Repo.insert! %Core.Subscription{user_id: "1234", active: true}
     {other_session_id, _} = AI.create_session("1234")
     %{is_subscribed: true} = AI.Actions.verify_subscription(other_session_id, %{}, nil)
   end

@@ -20,9 +20,8 @@ defmodule Core do
   @doc """
   Returns true if the user is subscribed to Dustbin's notifications false otherwise
   """
-  def is_subscribed?(user_id) do
-    not (Repo.get_by(Subscription, user_id: "#{user_id}")
-        |> is_nil)
+  def subscribed?(user_id) do
+    Subscription.subscribed? user_id
   end
 
   @doc """
@@ -32,5 +31,14 @@ defmodule Core do
   """
   def subscribe(user_id, location_id) do
     Subscription.create(user_id, location_id)
+  end
+
+  @doc """
+  Unsubscribes a user from Dustbin's notifications.
+  This function will mark a subscriptions property as not active (i.e. active: false)
+  Serves a wrapper around Subscription.deactivate/1
+  """
+  def unsubscribe(user_id) do
+    Subscription.deactivate(user_id)
   end
 end
