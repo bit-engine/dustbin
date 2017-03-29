@@ -60,17 +60,11 @@ defmodule AI.ActionsTest do
 
   test "performs a user subscription" do
     %Core.SupportedLocation{id: id} = Core.Repo.insert! %Core.SupportedLocation{city: "Montreal", country: "Canada"}
-    context = %{"location_id" => id}
+    context = %{location_id: id}
     {session_id, _} = AI.create_session("999")
     %{user_subscribed: true} = AI.Actions.subscribe(session_id, context, nil)
   end
 
-  test "location validation on user subscription is performed" do
-    context = %{"location_id" => "550e8400-e29b-41d4-a716-446655440000"}
-    {session_id, _} = AI.create_session("999")
-    %{user_not_subscribed: true} = AI.Actions.subscribe(session_id, context, nil)
-  end
-  
   defp assert_down(pid) do
     ref = Process.monitor(pid) 
     assert_receive {:DOWN, ^ref, _, _, _}
