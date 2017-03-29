@@ -5,6 +5,8 @@ defmodule AI.Actions do
 
   @temp "John Doe"
 
+  require Logger
+
   alias Core.SupportedLocation
   alias Core.Repo
   alias Wit.Models.Response.Converse, as: WitConverse
@@ -45,7 +47,8 @@ defmodule AI.Actions do
     case String.split(location, ~r{, }) do
       [city, country] ->
         case Repo.get_by(SupportedLocation, city: city, country: country) do
-          %SupportedLocation{id: id} -> Map.merge(context, %{location: location, location_supported: true, location_id: id})
+          %SupportedLocation{id: id} ->
+            Map.merge(context, %{location: location, location_supported: true, location_id: id})
           nil -> Map.merge(context, %{location: location, location_not_supported: true})
         end
       _ ->
@@ -53,8 +56,9 @@ defmodule AI.Actions do
     end
   end
 
-  defaction subscribe(session, context, _message) do
-    location_id = Map.get(context, "location_id")
+  defaction subscribe(session, %{location_id: location_id} = context, _message) do
+    Logger.debug "Debugging subscribe params"
+    Logger.debug location_id
     %{fbid: user_id} = AI.get_session(session)
     case Core.subscribe(user_id, location_id) do
       {:ok, _} -> Map.merge(context, %{user_subscribed: true})

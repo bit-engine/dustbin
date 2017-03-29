@@ -17,7 +17,7 @@ defmodule Core.Subscription do
   def changeset(subscription, params \\ %{}) do
     subscription
     |> cast(params, @fields)
-    |> validate_required(@fields)
+    |> validate_required(@fields ++ [:supported_location_id])
     |> unique_constraint(:user_id)
     |> foreign_key_constraint(:supported_location_id)
   end
@@ -31,8 +31,12 @@ defmodule Core.Subscription do
   end
 
   def create(user_id, location_id) do
+    location = Repo.get(SupportedLocation, location_id)
     params = %{user_id: user_id, active: true, lang: "EN"}
-    changeset = changeset(%Subscription{supported_location_id: location_id}, params)
+    changeset = 
+      location
+      |> Ecto.build_assoc(:subscriptions)
+      |> changeset(params)
     Repo.insert changeset
   end
 

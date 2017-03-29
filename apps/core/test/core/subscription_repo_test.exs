@@ -17,6 +17,7 @@ defmodule Core.SubscriptionTest do
 
   test "create a subscription via Subscription.create/2" do
     location_id = insert(:supported_location).id
+    IO.inspect location_id
     {:ok, %Core.Subscription{supported_location_id: ^location_id, lang: "EN", active: true, user_id: "999"}} = Core.Subscription.create("999", location_id)
     {:error, _} = Core.Subscription.create("999", location_id)
   end
