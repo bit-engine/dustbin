@@ -1,4 +1,8 @@
 defmodule Core.Factory do
+  @moduledoc """
+  Defines required factories in tests
+  """
+
   use ExMachina.Ecto, repo: Core.Repo
 
   alias Core.{
@@ -30,7 +34,6 @@ defmodule Core.Factory do
   def subscription_factory do
     %Subscription{
       supported_location: build(:supported_location),
-      collect_type: build(:collect_type),
       user_id: "9999",
       active: true,
       lang: "en"

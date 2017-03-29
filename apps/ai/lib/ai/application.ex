@@ -1,4 +1,4 @@
-defmodule Core.Application do
+defmodule AI.Application do
   @moduledoc false
 
   use Application
@@ -6,12 +6,12 @@ defmodule Core.Application do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    # Define workers and child supervisors to be supervised
     children = [
-      supervisor(Core.Repo, [])
+      supervisor(Task.Supervisor, [[name: AI.TaskSupervisor]]),
+      worker(AI, [])
     ]
 
-    opts = [strategy: :one_for_one, name: Core.Supervisor]
+    opts = [strategy: :one_for_one, name: AI.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end
