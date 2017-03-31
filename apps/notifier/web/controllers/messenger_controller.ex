@@ -1,14 +1,28 @@
 defmodule Notifier.MessengerController do
-	#require AI
+
+  @moduledoc false
+  @fb_token System.get_env("FB_VERIFY_TOKEN")
+
 	use Notifier.Web, :controller
 
-	def webhook(conn, _params) do
-		if conn.query_params["verify_token"] == System.get_env("FB_VERIFY_TOKEN")  do
-			text conn, conn.query_params["challenge"]
+  require Logger
+
+
+
+	def webhook(conn, %{"hub.verify_token" => token, "hub.mode" => "subscribe"}) do
+		if token == @fb_token do
+      Logger.info "Webhook successful"
+			send_resp(conn, 200, conn.query_params["challenge"])
 		else
-			send_resp(conn, 403, "Not Allowed")
+      webhook(conn, nil)
 		end
 	end
+
+  def webhook(conn, _params) do
+    Logger.error "Webhook validation failed"
+		send_resp(conn, 403, "Not Allowed")
+  end
+
 
 	def receive(conn, _params) do
 		if conn.body_params["object"] == "page" do
