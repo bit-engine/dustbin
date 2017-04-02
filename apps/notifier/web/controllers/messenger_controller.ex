@@ -24,22 +24,21 @@ defmodule Notifier.MessengerController do
   end
 
 
-	def receive(conn, _params) do
-		if conn.body_params["object"] == "page" do
-			all_messages_received =  Enum.reduce conn.body_params["entry"], [], fn entry, list ->
-				pair = Enum.map entry["messaging"], fn ev ->
-					%{:sender => ev["sender"]["id"], :text => ev["message"]["text"]}
-				end
-				list = list ++ pair
-			end 
-			Enum.map all_messages_received, fn pair ->
-				%{sender: sender, text: text} = pair
-				send_message(sender,text)
-				#AI.sendMessage(sender,text)
-			end
-		end
-		send_resp conn, 200, "" 
-	end
+  def receive(conn, %{"object" => "page", "entry" => entry}) do
+    Enum.each(entry, fn %{"messaging" => messaging} -> 
+      process_entry_messages(messaging)
+    end)
+    send_resp(conn, :ok, "")
+  end
+
+  defp process_entry_messages(messaging) do
+    Enum.each(messaging, fn messaging_evt ->
+      if Map.has_key?(messaging_evt, "message") do
+        %{"message" => %{"text" => text}, "sender" => %{"id" => uid}} = messaging_evt
+        AI.process(text, uid)
+      end
+    end)
+  end
 
 	def send_message(userID, message) do
 		_response = HTTPotion.post(

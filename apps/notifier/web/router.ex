@@ -5,7 +5,7 @@ defmodule Notifier.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", Notifier do
+  scope "/", Notifier do
     pipe_through :api
 
     get "/webhook", MessengerController, :webhook
