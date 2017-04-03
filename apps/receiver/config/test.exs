@@ -8,3 +8,5 @@ config :receiver, Receiver.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :receiver, fb_verify_token: "DUMMY_TOKEN"

@@ -1,34 +1,28 @@
 defmodule Receiver.MessengerController do
 
   @moduledoc false
-  @fb_token System.get_env("FB_VERIFY_TOKEN")
+  @fb_verify_token Application.get_env(:receiver, :fb_verify_token)
 
 	use Receiver.Web, :controller
 
   require Logger
 
 
-
-	def webhook(conn, %{"hub.verify_token" => token, "hub.mode" => "subscribe"}) do
-		if token == @fb_token do
+	def webhook(conn, %{"hub.verify_token" => token, "hub.mode" => "subscribe", "hub.challenge" => challenge}) do
+		if token == @fb_verify_token do
       Logger.info "Webhook successful"
-			send_resp(conn, 200, conn.query_params["challenge"])
+			send_resp(conn, 200, challenge)
 		else
-      webhook(conn, nil)
+      Logger.error "Webhook validation failed"
+		  send_resp(conn, 403, "Not Allowed")
 		end
 	end
-
-  def webhook(conn, _params) do
-    Logger.error "Webhook validation failed"
-		send_resp(conn, 403, "Not Allowed")
-  end
-
 
   def receive(conn, %{"object" => "page", "entry" => entry}) do
     Enum.each(entry, fn %{"messaging" => messaging} -> 
       process_entry_messages(messaging)
     end)
-    send_resp(conn, :ok, "")
+    send_resp(conn, 200, "")
   end
 
   defp process_entry_messages(messaging) do
