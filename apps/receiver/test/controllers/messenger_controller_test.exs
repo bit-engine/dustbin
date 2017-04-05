@@ -13,6 +13,12 @@ defmodule Receiver.MessengerControllerTest do
   end 
 
   test "GET /webhook: given the wrong parameters it responds with 403", %{conn: conn} do
-    assert true
+    conn = get conn, "/webhook?hub.verify_token=DUMMY_TOKEN&hub.challenge=CHALLENGE"
+    assert response(conn, 403) == "Incorrect parameters"
+  end
+
+  test "GET /webhook: given the incorrect verify_token it responds with 403" do
+    conn = get conn, "/webhook?hub.mode=subscribe&hub.verify_token=INCORRECT_DUMMY_TOKEN&hub.challenge=CHALLENGE"
+    assert response(conn, 403) == "Not Allowed"
   end
 end

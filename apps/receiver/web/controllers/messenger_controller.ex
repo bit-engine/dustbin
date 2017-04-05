@@ -18,6 +18,11 @@ defmodule Receiver.MessengerController do
 		end
 	end
 
+  def webhook(conn, _) do
+    Logger.error "Incorrect parameters supplied to webhook"
+		send_resp(conn, 403, "Incorrect parameters")
+  end
+
   def receive(conn, %{"object" => "page", "entry" => entry}) do
     Enum.each(entry, fn %{"messaging" => messaging} -> 
       process_entry_messages(messaging)
