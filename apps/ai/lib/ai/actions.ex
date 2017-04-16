@@ -11,9 +11,13 @@ defmodule AI.Actions do
 
   use Wit.Actions
 
-  def say(session, context, message) do
-    # Send Message to user in FB
-    # Must check for quick replies here if any in context
+  def say(session, context, %WitConverse{msg: msg}) do
+    %{fbid: id} = AI.get_session(session)
+    if Map.has_key?(context, :supported_locations_quick_replies) do
+      Xend.text(id, msg, context[:supported_locations_quick_replies], "REGULAR")
+    else
+      Xend.text(id, msg, "REGULAR")
+    end
   end
 
   def merge(session, context, %WitConverse{entities: %{"location" => [%{"value" => location} | _]}}) do
@@ -36,7 +40,7 @@ defmodule AI.Actions do
     quick_replies = Enum.map(Core.supported_locations, fn %SupportedLocation{id: id, city: city, country: country} ->
       %{title: "#{city}, #{country}", content_type: "text", payload: ""}
     end) 
-    Map.put(context, :quick_replies, quick_replies)  
+    Map.put(context, :supported_locations_quick_replies, quick_replies)  
   end
 
   # TODO
