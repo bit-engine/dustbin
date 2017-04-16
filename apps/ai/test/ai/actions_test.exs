@@ -39,7 +39,7 @@ defmodule AI.ActionsTest do
       content_type: "text",
       payload: ""
     }]
-    %{quick_replies: ^quick_replies} = AI.Actions.create_quick_replies_from_locations(nil, %{}, nil)
+    %{supported_locations_quick_replies: ^quick_replies} = AI.Actions.create_quick_replies_from_locations(nil, %{}, nil)
   end
 
   test "given a city and a country, a check for location support is done" do
