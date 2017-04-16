@@ -22,10 +22,11 @@ defmodule AI.Mixfile do
 
   defp deps do
     [
-      {:elixir_wit, "~> 2.0"},
+      {:elixir_wit, "~> 1.0.0"},
       {:ecto, "~> 2.1"},
       {:postgrex, ">= 0.0.0"},
       {:core, in_umbrella: true},
+      {:poison, "~> 3.0.0", override: true},
       {:xend, git: "git://github.com/saulecabrera/xend.git"}
     ]
   end
