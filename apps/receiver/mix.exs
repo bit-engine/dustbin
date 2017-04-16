@@ -38,6 +38,7 @@ defmodule Receiver.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
+     {:poison, "~> 3.0.0", override: true},
      {:ai, in_umbrella: true}]
   end
 end
