@@ -27,7 +27,7 @@ defmodule AI.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:core, in_umbrella: true},
       {:poison, "~> 3.0.0", override: true},
-      {:xend, git: "git://github.com/saulecabrera/xend.git"}
+      {:xend, "~> 0.6.0"}
     ]
   end
 
