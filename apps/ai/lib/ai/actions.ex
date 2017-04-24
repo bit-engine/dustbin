@@ -11,6 +11,8 @@ defmodule AI.Actions do
 
   use Wit.Actions
 
+  require Logger
+
   def say(session, context, %WitConverse{msg: msg}) do
     %{fbid: id} = AI.get_session(session)
     if Map.has_key?(context, :supported_locations_quick_replies) do
