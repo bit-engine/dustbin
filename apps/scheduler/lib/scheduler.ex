@@ -7,6 +7,8 @@ defmodule Scheduler do
   use GenServer
   use Timex
 
+  require Logger
+
   def start_link(state) do
     GenServer.start_link(__MODULE__, state, name: __MODULE__)
   end
@@ -23,9 +25,10 @@ defmodule Scheduler do
   end
 
   def handle_cast(:spawn_notification_tasks, state) do
+    Logger.info "[Scheduler] Running job @ #{timestamp()}"
     # Enum.each(pick_locations(),
     #  fn (location) ->
-    #    Task.Supervisor.async_nolink(Scheduler.TasksSupervisor, Messenger, :notify, [location])
+    #    Task.Supervisor.async_nolink(Scheduler.TasksSupervisor, Scheduler.Dispatcher, :notify, [location])
     # end
     # )
     {:noreply, state} 
@@ -48,6 +51,10 @@ defmodule Scheduler do
     noon? erl_datetime
   end
   
+  defp timestamp do
+    Timex.now("America/Toronto")
+    |> Timex.format!("%FT%T%:z", :strftime)
+  end
   defp noon?({_, {12, _, _}}), do: true
   defp noon?(_), do: false
 end
