@@ -15,7 +15,7 @@ defmodule Scheduler.Mixfile do
   end
 
   def application do
-    [applications: [:quantum, :timex, :core, :logger],
+    [applications: [:quantum, :timex, :core, :logger, :extwitter],
      mod: {Scheduler.Application, []}]
   end
 
@@ -23,6 +23,8 @@ defmodule Scheduler.Mixfile do
     [
       {:quantum, ">= 1.8.1"},
       {:timex, "~> 3.0"},
+      {:extwitter, "~> 0.8"},
+      {:poison, "~> 3.0.0", override: true},
       {:core, in_umbrella: true}
     ]
   end
