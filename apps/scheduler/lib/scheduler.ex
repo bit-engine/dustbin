@@ -26,11 +26,11 @@ defmodule Scheduler do
 
   def handle_cast(:spawn_notification_tasks, state) do
     Logger.info "[Scheduler] Running job @ #{timestamp()}"
-    # Enum.each(pick_locations(),
-    #  fn (location) ->
-    #    Task.Supervisor.async_nolink(Scheduler.TasksSupervisor, Scheduler.Dispatcher, :notify, [location])
-    # end
-    # )
+    Enum.each(pick_locations(),
+      fn (location) ->
+        Task.Supervisor.async_nolink(Scheduler.TasksSupervisor, Scheduler.Dispatcher, :notify, location)
+      end
+    )
     {:noreply, state} 
   end
 
