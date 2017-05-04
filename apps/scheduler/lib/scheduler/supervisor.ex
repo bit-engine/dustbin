@@ -9,7 +9,7 @@ defmodule Scheduler.Supervisor do
 
   def init(state) do
     children = [
-      supervisor(Task.Supervisor, [[name: Scheduler.TasksSupervisor]]),
+      supervisor(Task.Supervisor, [[name: Scheduler.TaskSupervisor]]),
       worker(Scheduler, [state], restart: :temporary)
     ]
     supervise children, strategy: :one_for_one
