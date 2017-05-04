@@ -7,6 +7,8 @@ defmodule Scheduler do
   use GenServer
   use Timex
 
+  alias Scheduler.Dispatcher
+
   require Logger
 
   def start_link(state) do
@@ -28,7 +30,7 @@ defmodule Scheduler do
     Logger.info "[Scheduler] Running job @ #{timestamp()}"
     Enum.each(pick_locations(),
       fn (location) ->
-        Task.Supervisor.async_nolink(Scheduler.TasksSupervisor, Scheduler.Dispatcher, :notify, location)
+        Task.Supervisor.async_nolink(Scheduler.TaskSupervisor, Dispatcher, :notify, [location])
       end
     )
     {:noreply, state} 
@@ -37,7 +39,7 @@ defmodule Scheduler do
   # Returns all supported locations in which it's noon, using the location's timezone
   defp pick_locations do
     Core.supported_locations
-    |> Enum.take_while(&noon?/1)
+    # |> Enum.take_while(&noon?/1)
   end
 
   # For a given location, it verifies if it's noon in the location's timezone
