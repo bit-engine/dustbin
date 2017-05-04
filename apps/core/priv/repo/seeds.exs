@@ -21,7 +21,7 @@ defmodule Core.DBSeeder do
   }
 
   Repo.insert! %CollectionSchedule{
-    scheduled_date: Ecto.Date.cast!("2017-05-02"),
+    scheduled_date: Ecto.Date.cast!("2017-05-04"),
     supported_location_id: chambly.id,
     collect_type_id: trash.id
   } 
