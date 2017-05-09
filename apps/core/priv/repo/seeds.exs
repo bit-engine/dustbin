@@ -4,25 +4,16 @@ defmodule Core.DBSeeder do
   alias Core.CollectType
   alias Core.CollectionSchedule
 
-  Repo.delete_all SupportedLocation
-  Repo.delete_all CollectType
-  Repo.delete_all CollectionSchedule
+  import Seedex
 
-  chambly = Repo.insert! %SupportedLocation{
-    city: "Chambly",
-    province_or_state: "Quebec",
-    country: "Canada",
-    country_code: "CA",
-    timezone: "America/Toronto"
-  }
+  require Logger
 
-  trash = Repo.insert! %CollectType{
-    type: "Trash"
-  }
+  @collect_types ["Recyclable Material", "Garbage", "Bulky Garbage", "Green Waste", "Natural Pine Tree", "Hazardous Household Waste", "Wood", "Electronic & Computer Equipment"]
 
-  Repo.insert! %CollectionSchedule{
-    scheduled_date: Ecto.Date.cast!("2017-05-04"),
-    supported_location_id: chambly.id,
-    collect_type_id: trash.id
-  } 
+  Enum.each(@collect_types, fn type -> 
+    seed CollectType, fn collect_type ->
+      %{collect_type | type: type}
+    end
+  end)
+
 end
