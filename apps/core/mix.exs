@@ -26,6 +26,7 @@ defmodule Core.Mixfile do
       {:ecto, "~> 2.1"},
       {:postgrex, ">= 0.0.0"},
       {:ex_machina, "~> 1.0", only: :test},
+      {:seedex, "~> 0.1.2"},
       {:timex, "~> 3.0"}
     ]
   end
