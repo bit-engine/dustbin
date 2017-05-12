@@ -8,7 +8,7 @@ defmodule Core.DBSeeder do
 
   require Logger
 
-  @collect_types ["Recyclable Material", "Garbage", "Bulky Garbage", "Green Waste", "Natural Pine Tree", "Hazardous Household Waste", "Dry Material & Wood", "Electronic & Computer Equipment"]
+  @collect_types ["Recyclable Material", "Garbage", "Garbage & Bulky Waste", "Green Waste", "Natural Pine Tree", "Hazardous Household Waste", "Dry Material & Wood", "Electronic & Computer Equipment"]
 
   # seed collect types
   for type <- @collect_types, do: seed CollectType, fn collect_type -> %{collect_type | type: type} end
