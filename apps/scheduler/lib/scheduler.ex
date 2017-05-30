@@ -39,7 +39,7 @@ defmodule Scheduler do
   # Returns all supported locations in which it's noon, using the location's timezone
   defp pick_locations do
     Core.supported_locations
-    # |> Enum.take_while(&noon?/1)
+    |> Enum.take_while(&noon?/1)
   end
 
   # For a given location, it verifies if it's noon in the location's timezone
@@ -53,10 +53,12 @@ defmodule Scheduler do
     noon? erl_datetime
   end
   
+  # Timestamp utility function for logging when is the job running
   defp timestamp do
     Timex.now("America/Toronto")
     |> Timex.format!("%FT%T%:z", :strftime)
   end
+
   defp noon?({_, {12, _, _}}), do: true
   defp noon?(_), do: false
 end
