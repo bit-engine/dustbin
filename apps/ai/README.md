@@ -2,9 +2,11 @@
 
 Defines actions and interactions with [Wit.ai](https://wit.ai/) API
 
-## Development mode
+### Environment Variables
 
-When in development mode, ai app will look for `WIT_ACCESS_TOKEN` environment variable, the easiest way to add one is to:
+- `WIT_ACCESS_TOKEN`
+
+### Adding the environment variable for development mode
 
 ```bash
 
