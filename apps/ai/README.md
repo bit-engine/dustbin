@@ -14,7 +14,7 @@ touch .env
 
 vim .env
 
-# edit file and add the variable described above
+# edit file and add the environment variables described above
 
 source .env
 ```
