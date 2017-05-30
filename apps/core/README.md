@@ -10,3 +10,7 @@ After cloning the repo:
 - `mix ecto.create`
 - `mix ecto.migrate`
 - `mix run priv/repo/seeds.exs`
+
+## Production
+
+- Have PostgreSQL installed
