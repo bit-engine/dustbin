@@ -14,3 +14,10 @@ After cloning the repo:
 ## Production
 
 - Have PostgreSQL installed
+
+### Environment variables
+
+- `DUSTBIN_DB_USERNAME`
+- `DUSTBIN_DB_PASSWORD`
+- `DUSTBIN_DB_NAME`
+- `DUSTBIN_DB_HOSTNAME`
