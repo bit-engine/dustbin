@@ -8,5 +8,4 @@ config :core, Core.Repo,
   password: System.get_env("DUSTBIN_DB_PASSWORD"),
   database: System.get_env("DUSTBIN_DB_NAME"),
   hostname: System.get_env("DUSTBIN_DB_HOSTNAME"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-
+  pool_size: 20
