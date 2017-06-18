@@ -15,7 +15,8 @@ defmodule Core.ReleaseTasks do
  
   def migrate do
     configure()
-    Enum.each(@apps, &run_migrations_for/1)
+    run_migrations_for(@app)
+
     IO.puts "Migration completed successfully!"
     :init.stop()
   end
