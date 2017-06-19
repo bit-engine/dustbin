@@ -48,7 +48,7 @@ release :dustbin do
     scheduler: :permanent
   ]
   set commands: [
-    "migrate": "rel/commands/migrate.sh"
+    "migrate": "rel/commands/migrate.sh",
     "seed": "rel/commands/seed.sh"
   ]
 end
