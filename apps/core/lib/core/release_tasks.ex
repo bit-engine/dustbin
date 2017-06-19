@@ -10,7 +10,16 @@ defmodule Core.ReleaseTasks do
   @repo Core.Repo
 
   def create do
+    IO.puts "Loading Dustbins Core"
+    :ok = Application.load(@app)
+
+    IO.puts "Starting dependencies"
+    Enum.each(@start_apps, &Application.ensure_all_started/1)
+
     @repo.__adapter__.config.storage_up(@repo.config)
+    
+    IO.puts "Database created successfully!"
+    :init.stop()
   end
  
   def migrate do
