@@ -10,11 +10,7 @@ defmodule Core.ReleaseTasks do
   @repo Core.Repo
 
   def create do
-    IO.puts "Loading Dustbins Core"
-    :ok = Application.load(@app)
-
-    IO.puts "Starting dependencies"
-    Enum.each(@start_apps, &Application.ensure_all_started/1)
+    configure()
 
     @repo.__adapter__.config.storage_up(@repo.config)
     
