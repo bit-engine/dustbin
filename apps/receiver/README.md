@@ -5,6 +5,7 @@ Defines the behaviors needed to interact with Facebook's API
 ### Environment Variables
 
 - `FB_VERIFY_TOKEN`
+- `SECRET_KEY_BASE`
 
 ### Adding the environment variable for development mode
 
