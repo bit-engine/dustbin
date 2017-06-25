@@ -18,8 +18,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :receiver, fb_verify_token: System.get_env("FB_VERIFY_TOKEN")
-
 config :receiver, ecto_repos: []
 
 # Import environment specific config. This must remain at the bottom

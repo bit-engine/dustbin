@@ -18,11 +18,12 @@ config :receiver, Receiver.Endpoint,
   server: true,
   root: ".",
   version: Mix.Project.config[:version],
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  secret_key_base: "${SECRET_KEY_BASE}"
 
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :receiver, fb_verify_token: "${FB_VERIFY_TOKEN}"
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

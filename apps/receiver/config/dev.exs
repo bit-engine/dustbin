@@ -26,6 +26,8 @@ config :receiver, Receiver.Endpoint,
     ]
   ]
 
+config :receiver, fb_verify_token: System.get_env("FB_VERIFY_TOKEN")
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
