@@ -50,7 +50,8 @@ release :dustbin do
   set commands: [
     "migrate": "rel/commands/migrate.sh",
     "seed": "rel/commands/seed.sh",
-    "create": "rel/commands/create.sh"
+    "create": "rel/commands/create.sh",
+    "drop": "rel/commands/drop.sh"
   ]
 end
 

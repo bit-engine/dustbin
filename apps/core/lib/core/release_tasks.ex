@@ -9,15 +9,6 @@ defmodule Core.ReleaseTasks do
 
   @repo Core.Repo
 
-  def create do
-    configure()
-
-    @repo.__adapter__.config.storage_up(@repo.config)
-    
-    IO.puts "Database created successfully!"
-    :init.stop()
-  end
- 
   def migrate do
     configure()
     run_migrations_for(@app)
