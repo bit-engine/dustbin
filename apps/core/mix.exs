@@ -17,7 +17,7 @@ defmodule Core.Mixfile do
   end
 
   def application do
-    [applications: [:ecto, :postgrex, :timex, :logger],
+    [applications: [:ecto, :postgrex, :timex, :logger, :seedex],
      mod: {Core.Application, []}]
   end
 
