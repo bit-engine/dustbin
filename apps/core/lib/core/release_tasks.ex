@@ -42,7 +42,7 @@ defmodule Core.ReleaseTasks do
 
   defp run_migrations_for(app) do
     IO.puts "Running migrations for #{app}"
-    Ecto.Migrator.run(MyApp.Repo, migrations_path(app), :up, all: true)
+    Ecto.Migrator.run(@repo, migrations_path(app), :up, all: true)
   end
 
   def migrations_path(app), do: Path.join([priv_dir(app), "repo", "migrations"])
