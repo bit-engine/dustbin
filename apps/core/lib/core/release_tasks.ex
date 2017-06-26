@@ -2,7 +2,8 @@ defmodule Core.ReleaseTasks do
 
   @start_apps [
     :postgrex,
-    :ecto
+    :ecto,
+    :seedex
   ]
 
   @app :core
@@ -34,6 +35,7 @@ defmodule Core.ReleaseTasks do
 
     IO.puts "Starting dependencies..."
     Enum.each(@start_apps, fn dep ->
+      IO.puts "Starting: #{dep}"
       case Application.ensure_all_started(dep) do
         {:ok, _} -> "Dependency #{dep} started"
         {:error, e} -> "Could not start dependency #{dep}: #{e}"
