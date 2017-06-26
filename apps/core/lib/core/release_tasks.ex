@@ -21,7 +21,7 @@ defmodule Core.ReleaseTasks do
     configure()
     seed_script = seed_path(@app)
     if File.exists?(seed_script) do
-      IO.puts "Seeding the database"
+      IO.puts "Seeding the database..."
       Code.eval_file(seed_script)
     end
     IO.puts "Seed script executed successfully!"
@@ -29,19 +29,24 @@ defmodule Core.ReleaseTasks do
   end
 
   defp configure do
-    IO.puts "Loading Dustbins Core"
+    IO.puts "Loading #{@app}..."
     :ok = Application.load(@app)
 
-    IO.puts "Starting dependencies"
-    Enum.each(@start_apps, &Application.ensure_all_started/1)
+    IO.puts "Starting dependencies..."
+    Enum.each(@start_apps, fn dep ->
+      case Application.ensure_all_started(dep) do
+        {:ok, _} -> "Dependency #{dep} started"
+        {:error, e} -> "Could not start dependency #{dep}: #{e}"
+      end
+    end)
 
-    IO.puts "Starting Dustbins Core Repo"
+    IO.puts "Starting #{@app} repo..."
     @repo.start_link(pool_size: 1)
   end
 
 
   defp run_migrations_for(app) do
-    IO.puts "Running migrations for #{app}"
+    IO.puts "Running migrations for #{app}..."
     Ecto.Migrator.run(@repo, migrations_path(app), :up, all: true)
   end
 
