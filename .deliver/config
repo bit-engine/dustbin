@@ -1,6 +1,6 @@
 APP="dustbin"
 
-BUILD_HOST="dustbin-build"
+BUILD_HOST="vagrant-ubuntu-trusty-64"
 BUILD_USER="vagrant"
 BUILD_AT="/tmp/edeliver/$APP/builds"
 
