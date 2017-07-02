@@ -45,7 +45,8 @@ release :dustbin do
     ai: :permanent,
     core: :permanent,
     receiver: :permanent,
-    scheduler: :permanent
+    scheduler: :permanent,
+    edeliver: :permanent
   ]
   set commands: [
     "migrate": "rel/commands/migrate.sh",
