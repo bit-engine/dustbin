@@ -41,12 +41,12 @@ end
 release :dustbin do
   set version: "0.0.1"
   set applications: [
+    :core,
+    :ai,
+    :receiver,
+    :scheduler,
     :runtime_tools,
-    :edeliver,
-    ai: :permanent,
-    core: :permanent,
-    receiver: :permanent,
-    scheduler: :permanent,
+    :edeliver
   ]
   set commands: [
     "migrate": "rel/commands/migrate.sh",
