@@ -46,7 +46,8 @@ release :dustbin do
     :receiver,
     :scheduler,
     :runtime_tools,
-    :edeliver
+    :edeliver,
+    oauther: :load, 
   ]
   set commands: [
     "migrate": "rel/commands/migrate.sh",
