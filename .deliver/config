@@ -13,9 +13,9 @@ STAGING_HOSTS="dustbin-build"
 STAGING_USER="vagrant"
 TEST_AT="/home/vagrant/"
 
-# PRODUCTION_HOSTS="188.166.182.170" */
-# PRODUCTION_USER="deploy" */
-# DELIVER_TO="/home/deploy" */
+PRODUCTION_HOSTS="dustbin-prod"
+PRODUCTION_USER="deploy"
+DELIVER_TO="/home/$PRODUCTION_USER"
 
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
