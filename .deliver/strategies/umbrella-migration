@@ -1,0 +1,11 @@
+# !/usr/bin/env bash
+
+# refer to https://elixirforum.com/t/edeliver-custom-commands/1511/4
+
+source "$(dirname $(dirname ${BASH_SOURCE[0]}))/strategies/erlang-node-execute"
+
+run() {
+  authorize_hosts
+  local _node=${NODES# *}
+  __execute_node_command "single_node" "$_node" "eval '/.bin/dustbin migrate'"
+}

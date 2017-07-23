@@ -1,10 +1,11 @@
-APP="dustbin"
+# Main application (at least for v0.10 -- no ai)
+APP="scheduler"
 
 BUILD_HOST="dustbin-build"
 BUILD_USER="vagrant"
-BUILD_AT="/tmp/edeliver/$APP/builds"
+BUILD_AT="/tmp/erlang/$APP/builds"
 
-RELEASE_DIR="/tmp/edeliver/$APP/builds/_build/prod/rel/$APP"
+RELEASE_DIR="$BUILD_AT/apps/$APP/rel/$APP"
 
 # prevent re-installing node modules; this defaults to "."
 GIT_CLEAN_PATHS="_build rel priv/static"

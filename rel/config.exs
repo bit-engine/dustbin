@@ -39,7 +39,7 @@ end
 # will be used by default
 
 release :dustbin do
-  set version: "0.0.1"
+  set version: "0.1.0"
   set applications: [
     :core,
     :ai,
