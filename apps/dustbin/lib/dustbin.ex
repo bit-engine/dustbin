@@ -1,0 +1,2 @@
+defmodule Dustbin do
+end

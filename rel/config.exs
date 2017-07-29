@@ -8,7 +8,7 @@ Path.join(["rel", "plugins", "*.exs"])
 
 use Mix.Releases.Config,
     # This sets the default release built by `mix release`
-    default_release: :master_app,
+    default_release: :dustbin,
     # This sets the default environment used by `mix release`
     default_environment: Mix.env()
 
@@ -38,10 +38,10 @@ end
 # when running `mix release`, the first release in the file
 # will be used by default
 
-release :master_app do
-  set version: current_version(:master_app)
+release :dustbin do
+  set version: current_version(:dustbin)
   set applications: [
-    :master_app,
+    :dustbin,
     :scheduler,
     :core,
     :receiver,
@@ -56,6 +56,6 @@ release :master_app do
     "create": "rel/commands/create.sh",
     "drop": "rel/commands/drop.sh"
   ]
-  set output_dir: "apps/master_app/rel/master_app"
+  set output_dir: "apps/dustbin/rel/dustbin"
 end
 

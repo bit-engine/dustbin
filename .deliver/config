@@ -1,4 +1,4 @@
-APP="master_app"
+APP="dustbin"
 
 BUILD_HOST="dustbin-build"
 BUILD_USER="vagrant"

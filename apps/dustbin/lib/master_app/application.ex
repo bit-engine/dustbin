@@ -1,4 +1,4 @@
-defmodule MasterApp.Application do
+defmodule Dustbin.Application do
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -16,7 +16,7 @@ defmodule MasterApp.Application do
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: MasterApp.Supervisor]
+    opts = [strategy: :one_for_one, name: Dustbin.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

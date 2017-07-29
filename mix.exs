@@ -1,4 +1,4 @@
-defmodule Dustbin.Mixfile do
+defmodule DustbinUmbrella.Mixfile do
   use Mix.Project
 
   def project do
