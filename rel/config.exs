@@ -8,7 +8,7 @@ Path.join(["rel", "plugins", "*.exs"])
 
 use Mix.Releases.Config,
     # This sets the default release built by `mix release`
-    default_release: :default,
+    default_release: :master_app,
     # This sets the default environment used by `mix release`
     default_environment: Mix.env()
 
@@ -38,13 +38,14 @@ end
 # when running `mix release`, the first release in the file
 # will be used by default
 
-release :dustbin do
+release :master_app do
   set version: "0.1.0"
   set applications: [
-    :core,
-    :ai,
-    :receiver,
+    :master_app,
     :scheduler,
+    :core,
+    :receiver,
+    :ai,
     :runtime_tools,
     :edeliver,
     oauther: :load, 

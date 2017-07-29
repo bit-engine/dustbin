@@ -1,9 +1,9 @@
 # Main application (at least for v0.10 -- no ai)
-APP="scheduler"
+APP="master_app"
 
 BUILD_HOST="dustbin-build"
 BUILD_USER="vagrant"
-BUILD_AT="/tmp/erlang/$APP/builds"
+BUILD_AT="/tmp/edeliver/$APP/builds"
 
 RELEASE_DIR="$BUILD_AT/apps/$APP/rel/$APP"
 
