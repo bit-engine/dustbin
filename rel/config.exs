@@ -39,7 +39,7 @@ end
 # will be used by default
 
 release :master_app do
-  set version: "0.1.0"
+  set version: current_version(:master_app)
   set applications: [
     :master_app,
     :scheduler,
@@ -56,6 +56,5 @@ release :master_app do
     "create": "rel/commands/create.sh",
     "drop": "rel/commands/drop.sh"
   ]
-  set :output_dir: "rel/master_app"
 end
 
