@@ -18,6 +18,8 @@ PRODUCTION_HOSTS="dustbin-prod"
 PRODUCTION_USER="deploy"
 DELIVER_TO="/home/$PRODUCTION_USER"
 
+ECTO_REPOSITORY="Elixir.Core.Repo"
+
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
   local _prod_secret_path="/home/deploy/prod.secret.exs"
