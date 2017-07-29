@@ -56,6 +56,6 @@ release :master_app do
     "create": "rel/commands/create.sh",
     "drop": "rel/commands/drop.sh"
   ]
-  set :output_dir: "apps/master_app/rel/master_app"
+  set :output_dir: "rel/master_app"
 end
 
