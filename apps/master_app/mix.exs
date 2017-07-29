@@ -3,7 +3,7 @@ defmodule MasterApp.Mixfile do
 
   def project do
     [app: :master_app,
-     version: "0.1.0",
+     version: append_revision("0.1.0"),
      deps_path: "../../deps",
      lockfile: "../../mix.lock",
      elixir: "~> 1.4",
@@ -17,6 +17,16 @@ defmodule MasterApp.Mixfile do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger, :core, :ai, :scheduler, :receiver],
      mod: {MasterApp.Application, []}]
+  end
+
+  defp append_revision(vsn) do
+    "#{vsn}+#{revision()}"
+  end
+
+  defp revision do
+    System.cmd("git", ["rev-parse", "--short", "HEAD"])
+    |> elem(0)
+    |> String.rstrip
   end
 
   # Dependencies can be Hex packages:

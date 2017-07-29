@@ -3,7 +3,7 @@ defmodule AI.Mixfile do
 
   def project do
     [app: :ai,
-     version: "0.3.1",
+     version: append_revision("0.3.1"),
      build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
@@ -30,6 +30,17 @@ defmodule AI.Mixfile do
       {:xend, "~> 0.6.0"}
     ]
   end
+
+  defp append_revision(vsn) do
+    "#{vsn}+#{revision()}"
+  end
+
+  defp revision do
+    System.cmd("git", ["rev-parse", "--short", "HEAD"])
+    |> elem(0)
+    |> String.rstrip
+  end
+
 
   # When running tests from the root of an umbrella,
   # test --no-start doesn't work, at this point the application

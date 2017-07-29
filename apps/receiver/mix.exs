@@ -3,7 +3,7 @@ defmodule Receiver.Mixfile do
 
   def project do
     [app: :receiver,
-     version: "0.0.1",
+     version: append_revision("0.1.0"),
      build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
@@ -27,6 +27,17 @@ defmodule Receiver.Mixfile do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
   defp elixirc_paths(_),     do: ["lib", "web"]
+
+  defp append_revision(vsn) do
+    "#{vsn}+#{revision()}"
+  end
+
+  defp revision do
+    System.cmd("git", ["rev-parse", "--short", "HEAD"])
+    |> elem(0)
+    |> String.rstrip
+  end
+
 
   # Specifies your project dependencies.
   #

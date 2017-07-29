@@ -3,7 +3,7 @@ defmodule Scheduler.Mixfile do
 
   def project do
     [app: :scheduler,
-     version: "0.3.0",
+     version: append_revision("0.3.0"),
      build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
@@ -18,6 +18,17 @@ defmodule Scheduler.Mixfile do
     [applications: [:quantum, :timex, :core, :logger, :extwitter],
      mod: {Scheduler.Application, []}]
   end
+
+  defp append_revision(vsn) do
+    "#{vsn}+#{revision()}"
+  end
+
+  defp revision do
+    System.cmd("git", ["rev-parse", "--short", "HEAD"])
+    |> elem(0)
+    |> String.rstrip
+  end
+
 
   defp deps do
     [
