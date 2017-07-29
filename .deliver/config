@@ -9,6 +9,7 @@ RELEASE_DIR="$BUILD_AT/apps/$APP/rel/$APP"
 
 # prevent re-installing node modules; this defaults to "."
 GIT_CLEAN_PATHS="_build rel priv/static"
+GIT_CLEAN_PATHS=${GIT_CLEAN_PATHS:="rel"}
 
 STAGING_HOSTS="dustbin-build"
 STAGING_USER="vagrant"
