@@ -1,18 +1,30 @@
 /* This file is for your main application css. */
 html, body {
-  background: #00c6ff;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #FFF;
   width: 100%;
   height: 100%!important;
+  font-family: 'Work Sans', sans-serif;
 }
 
 body .landing {
-  font-weight: 300;
   justify-content: center;
   display: flex;
-  color: white;
-  margin-top: 25%;
+  color: #676767;
+  margin: 5rem 0;
   flex-direction: column;
   text-align: center;
+}
+
+.landing .landing__description {
+  margin-bottom: 10rem;
+  font-size: 2rem;
+}
+
+/*
+ * 300: light
+ * 400: regular
+ * 600: semi-bold
+ */
+.light {
+  font-weight: 300;
 }

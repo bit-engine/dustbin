@@ -1,4 +1,4 @@
-# Dustbin - Waste Collection Assistant [![Build Status](https://travis-ci.org/bit-engine/dustbin.svg?branch=master)](https://travis-ci.org/bit-engine/dustbin)
+# Dustbin  [![Build Status](https://travis-ci.org/bit-engine/dustbin.svg?branch=master)](https://travis-ci.org/bit-engine/dustbin)
 
 ## What is Dustbin?
 Dustbin is a system built to remind people about the waste collection schedules in their cities, helping them with the tedious task of having to search every week for the date and type of the next waste collection ocurrence. 
