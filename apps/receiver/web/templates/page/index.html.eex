@@ -1,14 +1,1 @@
-<div class="landing">
-  <h1 class="landing__intro">Hi there, I'm Dustbin.</h1>
-  <h4 class="light landing__description">
-    I'm a waste collection bot, created to remind people about their
-    waste collection schedules. Feel free to follow me on <a href="https://twitter.com">Twitter</a> or
-    check out my internals in <a href="https://github.com/bitengine/dustbin">GitHub</a>
-  </h4>
-  <div class="landing__twitter-timeline">
-    <a class="twitter-timeline" href="https://twitter.com/dustbinthebot">
-      Tweets by dustbinthebot
-    </a>
-    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </div>
-</div>
+<div id="dustbin-landing"></div>

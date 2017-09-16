@@ -1,9 +1,52 @@
 /* This file is for your main application css. */
+
+
+@font-face {
+  font-family: 'Interface Bold';
+  src: url('../fonts/interface/Interface-Bold.woff') format('woff'),
+       url('../fonts/interface/Interface-Bold.woff2') format('woff2'); 
+}
+@font-face {
+  font-family: 'Interface Bold Italic';
+  src: url('../fonts/interface/Interface-BoldItalic.woff') format('woff'),
+       url('../fonts/interface/Interface-BoldItalic.woff2') format('woff2');
+
+}
+
+@font-face {
+  font-family: 'Interface Medium';
+  src: url('../fonts/interface/Interface-Medium.woff') format('woff'),
+       url('../assets/fonts/interface/Interface-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Interface Medium Italic';
+  src: url('../fonts/interface/Interface-MediumItalic.woff') format('woff'),
+       url('../fonts/interface/Interface-MediumItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Interface Regular';
+  src: url('../fonts/interface/Interface-Regular.woff') format('woff'),
+       url('../fonts/interface/Interface-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Interface Regular Italic';
+  src: url('../fonts/interface/Interface-RegularItalic.woff') format('woff'),
+       url('../fonts/interface/Interface-RegularItalic.woff2') format('woff2');
+}
+
+
+
+
+
 html, body {
   background: #FFF;
   width: 100%;
   height: 100%!important;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Interface Regular', sans-serif;
+  font-size: 14px;
 }
 
 body .landing {
