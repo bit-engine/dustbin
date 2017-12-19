@@ -43,9 +43,7 @@ release :dustbin do
   set applications: [
     :dustbin,
     :scheduler,
-    :core,
-    :receiver,
-    :ai,
+    :data,
     :runtime_tools,
     :edeliver,
     oauther: :load, 

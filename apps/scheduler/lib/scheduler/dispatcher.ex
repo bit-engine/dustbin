@@ -1,9 +1,9 @@
 defmodule Scheduler.Dispatcher do
 
-  def notify(location = %Core.SupportedLocation{timezone: timezone, country: country, city: city}) do
-    collects = Core.upcoming_collects(location)
+  def notify(location = %{:timezone => timezone, :city => city, }) do
+    collects = Dustbin.Data.upcoming_collects(location.slug)
     if length(collects) > 0 do
-      initial_message = "[#{city}, #{country}] - Collects for #{tomorrow(timezone)}: \n"
+      initial_message = "[#{city}] - Collects for #{tomorrow(timezone)}: \n"
       notification_message = compose_notification_message(collects, initial_message)
       ExTwitter.update notification_message
     end
@@ -11,7 +11,7 @@ defmodule Scheduler.Dispatcher do
 
   defp compose_notification_message([], msg), do: msg
   defp compose_notification_message([h | t], msg) do
-    compose_notification_message(t, msg <> "- #{h.collect_type.type } \n") 
+    compose_notification_message(t, msg <> "- #{h.name } \n") 
   end
 
   defp tomorrow(timezone) do

@@ -38,13 +38,13 @@ defmodule Scheduler do
 
   # Returns all supported locations in which it's noon, using the location's timezone
   defp pick_locations do
-    Core.supported_locations
+    Dustbin.Data.supported_locations
     |> Enum.take_while(&noon?/1)
   end
 
   # For a given location, it verifies if it's noon in the location's timezone
   # relative to the moment of execution of the function 
-  defp noon?(location = %Core.SupportedLocation{}) do
+  defp noon?(location = %{}) do
     erl_datetime = 
       location.timezone
       |> Timex.now

@@ -40,10 +40,8 @@ defmodule Dustbin.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:core, in_umbrella: true},
-      {:ai, in_umbrella: true},
+      {:data, in_umbrella: true},
       {:scheduler, in_umbrella: true},
-      {:receiver, in_umbrella: true}
     ]
   end
 end
