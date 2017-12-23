@@ -6,12 +6,13 @@ defmodule Dustbin.Data.CollectionSchedule do
   
   import Ecto, only: [assoc: 2]
 
-  @fields [:scheduled_date, :location_slug, :name]
+  @fields ~w(scheduled_date, type, name)
 
   schema "collection_schedules" do
     field :scheduled_date, :date
-    field :location_slug, :string
     field :name, :string
+    field :type, :string
+    belongs_to :location, Location
     timestamps()
   end
 
@@ -26,14 +27,14 @@ defmodule Dustbin.Data.CollectionSchedule do
   This function will query the database and look for all entries where the scheduled date
   equals exactly one day after today's date in the location's timezone. 
   """
-  def upcoming(location_slug) do
-    # TODO: throw eror if location slug is invalid?
-    location = SupportedLocation.location_for_slug(location_slug)
-    upcoming = from sch in CollectionSchedule,
-      where: sch.location_slug == ^location_slug and sch.scheduled_date == ^tomorrow(location.timezone)
+  # def upcoming(location_slug) do
+  #   # TODO: throw eror if location slug is invalid?
+  #   location = SupportedLocation.location_for_slug(location_slug)
+  #   upcoming = from sch in CollectionSchedule,
+  #     where: sch.location_slug == ^location_slug and sch.scheduled_date == ^tomorrow(location.timezone)
 
-    Repo.all upcoming
-  end
+  #   Repo.all upcoming
+  # end
 
   defp tomorrow(timezone) do
     Timex.now(timezone)
