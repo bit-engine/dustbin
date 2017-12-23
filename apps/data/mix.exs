@@ -25,7 +25,6 @@ defmodule Dustbin.Data.Mixfile do
     [
       {:ecto, "~> 2.1"},
       {:postgrex, ">= 0.0.0"},
-      {:ex_machina, "~> 1.0", only: :test},
       {:seedex, "~> 0.1.2"},
       {:timex, "~> 3.0"},
       {:nimble_csv, "~> 0.1.0"}
@@ -41,7 +40,6 @@ defmodule Dustbin.Data.Mixfile do
     |> elem(0)
     |> String.rstrip
   end
-
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]

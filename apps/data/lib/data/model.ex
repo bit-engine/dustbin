@@ -43,6 +43,7 @@ defmodule Dustbin.Data.Model do
       alias Dustbin.Data.{
         SupportedLocation,
         CollectionSchedule,
+        Location,
         Repo
       }
 

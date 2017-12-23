@@ -1,4 +1,4 @@
-defmodule Dustbin.Data.Case do
+defmodule Dustbin.APIWeb.DataCase do
   @moduledoc false
 
   use ExUnit.CaseTemplate
@@ -10,9 +10,8 @@ defmodule Dustbin.Data.Case do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Dustbin.Data.Case
-
-      use Dustbin.Data.Model
+      import Dustbin.API.Factory
+      import Dustbin.APIWeb.DataCase
     end
   end
 
