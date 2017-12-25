@@ -7,7 +7,7 @@ defmodule Dustbin.API.Schedules do
   alias Dustbin.Data.Repo
   alias Dustbin.Data.CollectionSchedule
 
-  def get_collection_schedule!(id) do
+  def get_collection_schedule(id = <<_::64, ?-, _::32, ?-, _::32, ?-, _::32, ?-, _::96>>) do
     query =
       from sch in CollectionSchedule,
       where: sch.id == ^id,
@@ -18,6 +18,8 @@ defmodule Dustbin.API.Schedules do
       nil ->  {:error, :not_found}
     end
   end
+  
+  def get_collection_schedule(_), do: {:error, :not_found}
 end
 
   

@@ -21,13 +21,20 @@ defmodule Dustbin.APIWeb.ConnCase do
       use Phoenix.ConnTest
       import Dustbin.APIWeb.Router.Helpers
 
+      import Dustbin.API.Factory
+
       # The default endpoint for testing
       @endpoint Dustbin.APIWeb.Endpoint
     end
   end
 
 
-  setup _tags do
+  setup tags do  
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Dustbin.Data.Repo)
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(Dustbin.Data.Repo, {:shared, self})
+    end
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 
