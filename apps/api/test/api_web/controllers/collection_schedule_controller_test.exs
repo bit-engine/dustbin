@@ -13,7 +13,7 @@ defmodule Dustbin.APIWeb.CollectionScheduleControllerTest do
     assert response["location"]["id"] == collect.location.id
   end
 
-  test "GET /collects/:id responds with 404 when given an unexistent :id" do
+  test "GET /collects/:id responds with 404 when given an unexistent :id", %{conn: conn} do
     assert(
       conn
       |> get(collection_schedule_path(conn, :show, "foo"))
