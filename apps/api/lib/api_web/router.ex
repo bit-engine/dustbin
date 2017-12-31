@@ -9,5 +9,6 @@ defmodule Dustbin.APIWeb.Router do
     pipe_through :api
     
     resources "/collects", CollectionScheduleController, only: [:show]
+    get "/locations/:id/collects", LocationController, :index, as: :location_collects
   end
 end

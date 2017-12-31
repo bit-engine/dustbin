@@ -41,7 +41,7 @@ defmodule Dustbin.Mixfile do
   defp deps do
     [
       {:data, in_umbrella: true},
-      {:scheduler, in_umbrella: true},
+      {:api, in_umbrella: true},
     ]
   end
 end

@@ -9,6 +9,8 @@ use Mix.Config
 config :api,
   namespace: Dustbin.API
 
+config :api, ecto_repos: []
+
 # Configures the endpoint
 config :api, Dustbin.APIWeb.Endpoint,
   url: [host: "localhost"],

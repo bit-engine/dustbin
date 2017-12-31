@@ -42,7 +42,7 @@ release :dustbin do
   set version: current_version(:dustbin)
   set applications: [
     :dustbin,
-    :scheduler,
+    :api,
     :data,
     :runtime_tools,
     :edeliver,
