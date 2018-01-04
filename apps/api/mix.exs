@@ -14,6 +14,7 @@ defmodule Dustbin.API.Mixfile do
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       elixirc_paths: elixirc_paths(Mix.env),
+      aliases: aliases(),
       deps: deps()
     ]
   end
@@ -41,6 +42,10 @@ defmodule Dustbin.API.Mixfile do
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
+  defp aliases() do
+    []
+  end
+
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
@@ -52,6 +57,7 @@ defmodule Dustbin.API.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+      {:timex, "~> 3.0"},
       {:ex_machina, "~> 2.1", only: :test},
       {:data, in_umbrella: true}
     ]

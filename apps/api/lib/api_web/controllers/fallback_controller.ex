@@ -18,4 +18,10 @@ defmodule Dustbin.APIWeb.FallbackController do
     conn
     |> send_resp(:not_found, "")
   end
+
+  def call(conn, {:error, {:bad_request, details}}) do
+    conn
+    |> put_status(:bad_request)
+    |> render(Dustbin.APIWeb.ErrorView, "400.json", details: details)
+  end
 end

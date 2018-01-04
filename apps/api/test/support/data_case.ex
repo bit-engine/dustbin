@@ -19,7 +19,7 @@ defmodule Dustbin.APIWeb.DataCase do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Dustbin.Data.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Dustbin.Data.Repo, {:shared, self})
+      Ecto.Adapters.SQL.Sandbox.mode(Dustbin.Data.Repo, {:shared, self()})
     end
 
     :ok

@@ -1,8 +1,11 @@
 defmodule Dustbin.APIWeb.ErrorView do
   use Dustbin.APIWeb, :view
 
-  def render("404.html", _assigns) do
-    "Page not found"
+  def render("400.json", %{details: details}) do
+    %{
+      error: "Bad Request",
+      details: details,
+    }
   end
 
   def render("500.html", _assigns) do

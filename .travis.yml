@@ -1,12 +1,19 @@
 language: elixir
-elixir: 1.4
-otp_release: 18.3
-sudo: false
-addons:
-  - postgresql: 9.5.3
+elixir: 1.4.5
+otp_release: 20.0
+sudo: required
+
+services:
+  - docker
+
 before_script:
+  - sudo service postgresql stop
+  - docker-compose up -d
+  - docker ps -a
   - MIX_ENV=test mix compile
-  - MIX_ENV=test mix ecto.create
+
 script:
   - mix test
-  - echo "Re-running tests for each app" ; for app in apps/**; do cd $app && mix test; cd ../.. ; done
+
+after_script:
+  - docker-compose down
