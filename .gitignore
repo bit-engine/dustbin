@@ -31,3 +31,6 @@ erl_crash.dump
 
 # edeliver
 .deliver/releases/
+
+# volumes
+volumes/*/*

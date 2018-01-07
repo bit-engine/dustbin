@@ -2,6 +2,6 @@ use Mix.Config
 
 config :data, Dustbin.Data.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "dustbin",
+  username: "postgres",
   database: "dustbin_#{Mix.env}",
   hostname: "localhost"
