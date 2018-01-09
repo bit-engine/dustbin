@@ -3,6 +3,7 @@ defmodule Dustbin.APIWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Dustbin.API.Locale
   end
 
   scope "/", Dustbin.APIWeb do

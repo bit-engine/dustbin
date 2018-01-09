@@ -47,4 +47,46 @@ defmodule Dustbin.APIWeb.LocationControllerTest do
       |> response(404)
     )
   end
+
+  test "GET /locations/:id/collects with a supported locale applies the correct translation to name and details", %{conn: conn} do
+    location = insert(:location)
+    collects_sequence(location, [upcoming: 1, past: 1])
+
+    response = conn
+    |> put_req_header("accept-language", "fr")
+    |> get(location_collects_path(conn, :index, location))
+    |> json_response(200)
+    |> Map.get("collects")
+
+    [head|_] = response
+    assert head["name"] == "Ordures et encombrants"
+    assert head["details"] == "Encombrants: tapis et toiles de piscine roulés, mobilier"
+
+  
+    response = conn
+    |> put_req_header("accept-language", "en")
+    |> get(location_collects_path(conn, :index, location))
+    |> json_response(200)
+    |> Map.get("collects")
+
+
+    [head|_] = response
+    assert head["name"] == "Garbage and bulky waste"
+    assert head["details"] == "Bulky waste: rugs and rolled pool mats, furniture"
+  end
+
+  test "GET /locations/:id/collects with an unknown locale or no locale at all, defaults to en_US", %{conn: conn} do 
+    location = insert(:location)
+    collects_sequence(location, [upcoming: 1, past: 1])
+
+    response = conn
+    |> get(location_collects_path(conn, :index, location))
+    |> json_response(200)
+    |> Map.get("collects")
+
+
+    [head|_] = response
+    assert head["name"] == "Garbage and bulky waste"
+    assert head["details"] == "Bulky waste: rugs and rolled pool mats, furniture"
+  end
 end

@@ -16,9 +16,9 @@ defmodule Dustbin.API.Factory do
 
   def collection_schedule_factory do
     %CollectionSchedule{
-      name: "Waste",
+      name: "Garbage and bulky waste",
       scheduled_date: "2018-01-08",
-      type: "Waste",
+      details: "Bulky waste: rugs and rolled pool mats, furniture",
       location: build(:location),
     }
   end
