@@ -11,6 +11,9 @@ config :api,
 
 config :api, ecto_repos: []
 
+config :api, Dustbin.APIWeb.Gettext,
+  default_locale: "en"
+
 # Configures the endpoint
 config :api, Dustbin.APIWeb.Endpoint,
   url: [host: "localhost"],
