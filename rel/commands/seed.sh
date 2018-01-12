@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bin/dustbin command Elixir.Core.ReleaseTasks seed
+bin/dustbin command Elixir.Dustbin.Data.ReleaseTasks seed

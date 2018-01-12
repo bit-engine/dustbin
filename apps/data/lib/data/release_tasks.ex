@@ -1,4 +1,10 @@
 defmodule Dustbin.Data.ReleaseTasks do
+  @moduledoc"""
+  This file defines all the tasks that will be available for the current release. 
+  Once the release is ready, they will be available as:
+    
+    bin/dustbin [seed|migrate]
+  """
 
   @start_apps [
     :postgrex,
@@ -6,34 +12,43 @@ defmodule Dustbin.Data.ReleaseTasks do
     :seedex
   ]
 
-  @app :data
-
   @repo Dustbin.Data.Repo
 
-  def migrate do
-    configure()
-    run_migrations_for(@app)
+  def app, do: :data
 
-    IO.puts "Migration completed successfully!"
-    :init.stop()
+  def repos, do: Application.get_env(app(), :ecto_repos, [])
+
+  def migrate do
+    prepare()
+    Enum.each(repos(), &run_migrations_for/1)
+    IO.puts "Migration completed."
   end
 
   def seed do
-    configure()
-    seed_script = seed_path(@app)
-    if File.exists?(seed_script) do
-      IO.puts "Seeding the database..."
-      Code.eval_file(seed_script)
-    end
-    IO.puts "Seed script executed successfully!"
+    migrate()
+    Enum.each(repos(), &run_seeds_for/1)
+    IO.puts "Seed completed."
     :init.stop()
+  end 
+
+  defp run_migrations_for(repo) do
+    IO.puts "Running migrations for #{repo}..."
+    Ecto.Migrator.run(repo, migrations_path(repo), :up, all: true)
   end
 
-  defp configure do
-    IO.puts "Loading #{@app}..."
-    :ok = Application.load(@app)
+  defp run_seeds_for(repo) do
+    seed = seeds_path(repo)
+    if File.exists?(seed) do
+      IO.puts "Seeding..."
+      Code.eval(seed)
+    end
+  end
 
+  defp prepare do
+    IO.puts "Loading #{app()}..."
+    :ok = Application.load(app())
     IO.puts "Starting dependencies..."
+
     Enum.each(@start_apps, fn dep ->
       IO.puts "Starting: #{dep}"
       case Application.ensure_all_started(dep) do
@@ -42,20 +57,23 @@ defmodule Dustbin.Data.ReleaseTasks do
       end
     end)
 
-    IO.puts "Starting #{@app} repo..."
-    @repo.start_link(pool_size: 1)
+    IO.puts "Starting #{app()} repos..."
+    Enum.each(repos(), &(&1.start_link(pool_size: 1)))
   end
 
 
-  defp run_migrations_for(app) do
-    IO.puts "Running migrations for #{app}..."
-    Ecto.Migrator.run(@repo, migrations_path(app), :up, all: true)
-  end
-
-  def migrations_path(app), do: Path.join([priv_dir(app), "repo", "migrations"])
-
-  def seed_path(app), do: Path.join([priv_dir(app), "repo", "seeds.exs"])
+  def migrations_path(repo), do: priv_path_for(repo, "migrations")
+  def seeds_path(repo), do: priv_path_for(repo, "seeds.exs")
 
   def priv_dir(app), do: "#{:code.priv_dir(app)}"
 
+  def priv_path_for(repo, filename) do
+    app = Keyword.get(repo.config, :otp_app)
+    underscore =
+      repo
+      |> Module.split
+      |> List.last
+      |> Macro.underscore
+    Path.join(priv_dir(app), underscore, filename)
+  end
 end
