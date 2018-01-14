@@ -17,5 +17,6 @@ defmodule Dustbin.Data.Location do
     location
     |> cast(params, @fields)
     |> validate_required(@fields)
+    |> unique_constraint(:slug)
   end
 end

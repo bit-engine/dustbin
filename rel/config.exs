@@ -51,8 +51,8 @@ release :dustbin do
   set commands: [
     "migrate": "rel/commands/migrate.sh",
     "seed": "rel/commands/seed.sh",
-    "create": "rel/commands/create.sh",
-    "drop": "rel/commands/drop.sh"
+    "create": "rel/commands/create.sh", # handle this with ansible?
+    "drop": "rel/commands/drop.sh" # handle this with ansible?
   ]
   set output_dir: "apps/dustbin/rel/dustbin"
 end

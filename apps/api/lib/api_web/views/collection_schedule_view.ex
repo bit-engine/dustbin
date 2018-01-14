@@ -36,6 +36,10 @@ defmodule Dustbin.APIWeb.CollectionScheduleView do
   defp translate(map) do
     map
     |> Map.update!(:name, &(Gettext.gettext(Dustbin.APIWeb.Gettext, &1)))
-    |> Map.update(:details, "", &(Gettext.gettext(Dustbin.APIWeb.Gettext, &1)))
+    |> Map.update!(:details,
+     fn
+       nil -> nil
+       value -> Gettext.gettext(Dustbin.APIWeb.Gettext, value)
+    end)
   end
 end

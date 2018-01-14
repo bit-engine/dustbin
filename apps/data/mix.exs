@@ -17,7 +17,7 @@ defmodule Dustbin.Data.Mixfile do
   end
 
   def application do
-    [applications: [:ecto, :postgrex, :timex, :logger, :seedex, :nimble_csv],
+    [applications: [:ecto, :postgrex, :timex, :logger],
      mod: {Dustbin.Data.Application, []}]
   end
 
@@ -25,9 +25,8 @@ defmodule Dustbin.Data.Mixfile do
     [
       {:ecto, "~> 2.1"},
       {:postgrex, ">= 0.0.0"},
-      {:seedex, "~> 0.1.2"},
       {:timex, "~> 3.0"},
-      {:nimble_csv, "~> 0.1.0"}
+      {:poison, "~> 3.0"}
     ]
   end
 

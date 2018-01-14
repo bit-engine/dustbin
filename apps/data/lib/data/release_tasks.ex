@@ -12,8 +12,6 @@ defmodule Dustbin.Data.ReleaseTasks do
     :seedex
   ]
 
-  @repo Dustbin.Data.Repo
-
   def app, do: :data
 
   def repos, do: Application.get_env(app(), :ecto_repos, [])
@@ -40,7 +38,7 @@ defmodule Dustbin.Data.ReleaseTasks do
     seed = seeds_path(repo)
     if File.exists?(seed) do
       IO.puts "Seeding..."
-      Code.eval(seed)
+      Code.eval_file(seed)
     end
   end
 
@@ -74,6 +72,6 @@ defmodule Dustbin.Data.ReleaseTasks do
       |> Module.split
       |> List.last
       |> Macro.underscore
-    Path.join(priv_dir(app), underscore, filename)
+    Path.join([priv_dir(app), underscore, filename])
   end
 end

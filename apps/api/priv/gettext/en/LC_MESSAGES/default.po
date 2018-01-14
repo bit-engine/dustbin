@@ -19,7 +19,7 @@ msgstr ""
 msgid "Garbage"
 msgstr ""
 
-msgid "Reciclable material"
+msgid "Recyclable material"
 msgstr ""
 
 msgid "Organic material"
