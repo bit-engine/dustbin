@@ -26,7 +26,7 @@ defmodule Dustbin.API.Schedules do
 
   @doc """
   Get a list of collection schedules for a specific location.
-  By default only the *upcoming* collection schedules will be retrieved,
+  By default only the *upcoming* collection schedules will be retrieved (ordered by scheduled_date),
   unless indicated to retrive them all via the filter query string
   """
 
@@ -48,7 +48,8 @@ defmodule Dustbin.API.Schedules do
       join: loc in Location, where: loc.id == sch.location_id 
     
     query = from [c, l] in query,
-      where: c.location_id == ^id and c.scheduled_date >= fragment("(timezone(?, now()))::date", l.timezone)
+      where: c.location_id == ^id and c.scheduled_date >= fragment("(timezone(?, now()))::date", l.timezone),
+      order_by: [asc: :scheduled_date]
 
     {:ok, Repo.all(query)} 
   end

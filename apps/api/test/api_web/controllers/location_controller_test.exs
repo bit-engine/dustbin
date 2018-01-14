@@ -18,7 +18,7 @@ defmodule Dustbin.APIWeb.LocationControllerTest do
   end
 
   test "GET /locations/:id/collects returns all collection schedules when applying all as filter", %{conn: conn} do
-    location = insert(:location)
+    location = insert(:location, slug: "nyc")
     collects_sequence(location, [upcoming: 5, past: 1])
 
     collects_sequence(insert(:location))

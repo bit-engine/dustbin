@@ -4,8 +4,6 @@ defmodule Dustbin.Data.CollectionSchedule do
   use Dustbin.Data.Model, :schema
   use Timex
   
-  import Ecto, only: [assoc: 2]
-
   @required_fields ~w(scheduled_date, name)
   @optional_fields ~w(details)
 

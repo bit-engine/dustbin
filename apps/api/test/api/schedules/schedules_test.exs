@@ -52,7 +52,7 @@ defmodule Dustbin.API.SchedulesTest do
     end
 
     test "it returns all the collection schedules for a location  when the all filter is given" do
-      location = insert(:location)
+      location = insert(:location, slug: "nyc")
       insert_list(5, :collection_schedule, location: location)
       insert(:collection_schedule)
 

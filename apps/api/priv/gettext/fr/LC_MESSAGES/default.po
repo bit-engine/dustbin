@@ -19,7 +19,7 @@ msgstr "Encombrants: tapis et toiles de piscine roulés, mobilier"
 msgid "Garbage"
 msgstr "Ordures"
 
-msgid "Reciclable material"
+msgid "Recyclable material"
 msgstr "Matières recyclables"
 
 msgid "Organic material"
