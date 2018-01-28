@@ -1,2 +1,0 @@
-defmodule DataTest do
-end
