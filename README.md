@@ -1,17 +1,21 @@
-# Dustbin  [![Build Status](https://travis-ci.org/bit-engine/dustbin.svg?branch=master)](https://travis-ci.org/bit-engine/dustbin)
+# Dustbin
 
-## What is Dustbin?
-Dustbin is a system built to remind people about the waste collection schedules in their cities, helping them with the tedious task of having to search every week for the date and type of the next waste collection ocurrence. 
+**TODO: Add description**
 
-Dustbin tracks every waste collection ocurrence for a specific city and publishes it in the most popular social media channels (Twitter) or in a more personalized fashion via subscriptions (FB Messenger).
+## Installation
 
-## Which cities are currently supported?
+If [available in Hex](https://hex.pm/docs/publish), the package can be installed
+by adding `dustbin` to your list of dependencies in `mix.exs`:
 
-- Chambly, Canada
+```elixir
+def deps do
+  [
+    {:dustbin, "~> 0.1.0"}
+  ]
+end
+```
 
-More cities will continue to be added.
-Open an issue if you would like support for an specific city.
+Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
+and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
+be found at [https://hexdocs.pm/dustbin](https://hexdocs.pm/dustbin).
 
-## Roadmap
-
-See [here](https://github.com/bit-engine/dustbin/projects) for more details

@@ -1,0 +1,87 @@
+[
+  {
+    "2018-01-02": [
+      {
+        "name": "Ordures et encombrants"
+      },
+      {
+        "name": "Matières recyclables"
+      }
+    ]
+  },
+  {
+    "2018-01-08": [
+      {
+        "name": "Sapins naturels"
+      }
+    ]
+  },
+  {
+    "2018-01-16": [
+      {
+        "name": "Matières recyclables"
+      },
+      {
+        "name": "Ordures"
+      }
+    ]
+  },
+  {
+    "2018-01-18": [
+      {
+        "name": "Matières organiques"
+      }
+    ]
+  },
+  {
+    "2018-01-30": [
+      {
+        "name": "Matières recyclables"
+      },
+      {
+        "name": "Ordures"
+      }
+    ]
+  },
+  {
+    "2018-02-01": [
+      {
+        "name": "Matières organiques"
+      }
+    ]
+  },
+  {
+    "2018-02-02": [
+      {
+        "name": "Dépôt des résidus domestiques dangereux"
+      }
+    ]
+  },
+  {
+    "2018-02-13": [
+      {
+        "name": "Matières recyclables"
+      },
+      {
+        "name": "Ordures et encombrants"
+      }
+    ]
+  },
+  {
+    "2018-02-15": [
+      {
+        "name": "Matières organiques"
+      }
+    ]
+  },
+  {
+    "2018-02-27": [
+      {
+        "name": "Matières recyclables"
+      },
+      {
+        "name": "Ordures"
+      }
+    ]
+  }
+]
