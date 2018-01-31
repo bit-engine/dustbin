@@ -18,9 +18,9 @@ defmodule Dustbin.Schedule do
     end
 
     quote do
-      def schedule(location_name, date)
+      def find(location_name, date)
       unquote(ast)
-      def schedule(_location_name, _date), do: {:error, :not_found}
+      def find(_location_name, _date), do: {:error, :not_found}
     end
   end
 
@@ -32,8 +32,9 @@ defmodule Dustbin.Schedule do
     for entry <- Jason.decode!(contents) do
       [{date, occurrences}] = Map.to_list(entry)
       escaped = Macro.escape(occurrences)
+
       quote do
-        def find(unquote(location_name), unquote(date)), do: unquote(escaped)
+        def find(unquote(location_name), unquote(date)), do: {:ok, unquote(escaped)}
       end
     end
   end
@@ -41,6 +42,7 @@ defmodule Dustbin.Schedule do
   defmacro schedule(opts) do
     location_name = Keyword.get(opts, :location_name)
     path = Keyword.get(opts, :path)
+
     quote bind_quoted: [location_name: location_name, path: path] do
       @schedules {location_name, path}
     end

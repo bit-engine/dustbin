@@ -8,7 +8,8 @@ defmodule Dustbin.Application do
 
     children = [
       worker(Dustbin.Scheduler, []),
-      worker(Dustbin.Notifier, [])
+      worker(Dustbin.Notifier, []),
+      supervisor(Task.Supervisor, [[name: Dustbin.TaskSupervisor]])
     ]
 
     opts = [strategy: :one_for_one, name: Dustbin.Supervisor]
