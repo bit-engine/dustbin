@@ -13,8 +13,8 @@ defmodule Dustbin.Schedule do
   end
 
   def compile(schedules) do
-    ast = for {location_name, path} <- schedules do
-      defschedules(location_name, path)
+    ast = for {location_name, type, element} <- schedules do
+      defschedules(location_name, type, element)
     end
 
     quote do
@@ -24,7 +24,7 @@ defmodule Dustbin.Schedule do
     end
   end
 
-  defp defschedules(location_name, path) do
+  defp defschedules(location_name, :file, path) do
     contents =
       Path.join(:code.priv_dir(:dustbin), "#{location_name}/#{path}")
       |> File.read!
@@ -33,18 +33,38 @@ defmodule Dustbin.Schedule do
       [{date, occurrences}] = Map.to_list(entry)
       escaped = Macro.escape(occurrences)
 
-      quote do
-        def find(unquote(location_name), unquote(date)), do: {:ok, unquote(escaped)}
-      end
+      deffind(location_name, date, escaped)
     end
+  end
+
+  defp defschedules(location_name, :inline, array) do
+    for entry <- array do
+      [{date, occurrences}] = Map.to_list(entry)
+      escaped = Macro.escape(occurrences)
+      
+      deffind(location_name, date, escaped)
+    end
+  end
+
+  defp deffind(location_name, date, body) do
+    quote do
+      def find(unquote(location_name), unquote(date)), do: {:ok, unquote(body)}
+    end   
   end
   
   defmacro schedule(opts) do
     location_name = Keyword.get(opts, :location_name)
-    path = Keyword.get(opts, :path)
-
-    quote bind_quoted: [location_name: location_name, path: path] do
-      @schedules {location_name, path}
+    
+    {type, element} =
+      cond do
+        path = Keyword.get(opts, :path) ->
+          {:file, path}
+        inline = Keyword.get(opts, :inline) ->
+          {:inline, inline}
+      end
+        
+    quote bind_quoted: [location_name: location_name, type: type, element: element] do
+      @schedules {location_name, type, element}
     end
   end
 end
