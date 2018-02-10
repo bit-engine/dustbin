@@ -24,7 +24,8 @@ defmodule Dustbin.MixProject do
       {:timex, "~> 3.0"},
       {:jason, "~> 1.0"},
       {:oauther, "~> 1.1"},
-      {:extwitter, "~> 0.8"}
+      {:extwitter, "~> 0.8"},
+      {:distillery, "~> 1.5", runtime: false}
     ]
   end
 end
