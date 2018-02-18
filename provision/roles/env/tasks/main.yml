@@ -1,0 +1,13 @@
+---
+- name: Set environment variables
+  become: yes
+  lineinfile:
+    dest: /etc/environment
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: "^TWITTER_CONSUMER_KEY=", line: "TWITTER_CONSUMER_KEY='{{ twitter_consumer_key }}'" }
+    - { regexp: "^TWITTER_CONSUMER_SECRET=", line: "TWITTER_CONSUMER_SECRET='{{ twitter_consumer_secret }}'" }
+    - { regexp: "^TWITTER_ACCESS_TOKEN=", line: "TWITTER_ACCESS_TOKEN='{{ twitter_access_token }}'" }
+    - { regexp: "^TWITTER_ACCESS_TOKEN_SECRET=", line: "TWITTER_ACCESS_TOKEN_SECRET='{{ twitter_access_token_secret }}'" }
+    - { regexp: "^REPLACE_OS_VARS=", line: "REPLACE_OS_VARS=true" }

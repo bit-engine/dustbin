@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+APP="dustbin"
+
+AUTO_VERSION="commit-count+git-revision+branch-unless-master"
+
+BUILD_HOST="build.dustbin"
+BUILD_USER="vagrant"
+BUILD_AT="/tmp/edeliver/dustbin/builds"
+
+# Make sure to have this entry mapped correctly in /ect/hosts
+PRODUCTION_HOSTS="app.dustbin" 
+PRODUCTION_USER="deploy"
+DELIVER_TO="/var/web/dustbin"
+

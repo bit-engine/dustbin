@@ -14,7 +14,7 @@ defmodule Dustbin.MixProject do
   def application do
     [
       mod: {Dustbin.Application, []},
-      extra_applications: [:logger]
+      extra_applications: [:logger, :edeliver]
     ]
   end
 
@@ -25,7 +25,8 @@ defmodule Dustbin.MixProject do
       {:jason, "~> 1.0"},
       {:oauther, "~> 1.1"},
       {:extwitter, "~> 0.8"},
-      {:distillery, "~> 1.5", runtime: false}
+      {:distillery, "~> 1.5", runtime: false},
+      {:edeliver, "~> 1.4.5"}
     ]
   end
 end

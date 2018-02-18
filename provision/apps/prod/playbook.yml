@@ -1,0 +1,26 @@
+---
+- hosts: all
+  user: "{{ user | default('root') }}"
+  become: yes
+  gather_facts: no
+  pre_tasks:
+    - name: Install Python
+      raw: sudo apt-get -y install python-minimal
+
+  roles:
+    - role: bootstrap
+    - role: user
+      username: admin
+      sudoer: True
+      authorized_keys_path:
+        - ../../keys/*.pub
+    - role: user
+      username: deploy
+      sudoer: False
+      authorized_keys_path:
+        - ../../keys/*.pub
+    - role: ssh
+  
+  handlers:
+    - name: Restart SSH
+      service: name=ssh state=restarted
