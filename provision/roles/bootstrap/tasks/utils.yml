@@ -4,6 +4,7 @@
   with_items:
     - git
     - vim
+    - libwxgtk3.0-0v5
 
 - name: Set default editor
   alternatives:
