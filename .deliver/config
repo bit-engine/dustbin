@@ -11,5 +11,5 @@ BUILD_AT="/tmp/edeliver/dustbin/builds"
 # Make sure to have this entry mapped correctly in /ect/hosts
 PRODUCTION_HOSTS="app.dustbin" 
 PRODUCTION_USER="deploy"
-DELIVER_TO="/dustbin"
+DELIVER_TO="dustbin"
 
