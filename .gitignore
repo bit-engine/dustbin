@@ -34,3 +34,10 @@ erl_crash.dump
 
 # volumes
 volumes/*/*
+
+# vault pass
+provision/vault_pass.txt
+
+provision/*.log
+provision/*.retry
+.deliver/releases/

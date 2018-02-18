@@ -1,0 +1,21 @@
+---
+- name: Install english language pack
+  apt:
+    pkg: 'language-pack-en'
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Export language
+  shell: export LANGUAGE=en_US.UTF-8
+
+- name: Export LANG
+  shell: export LANG=en_US.UTF-8
+
+- name: apt LC_ALL
+  shell: export LC_ALL=en_US.UTF-8
+
+- name: Generate locale
+  shell: locale-gen en_US.UTF-8
+
+- name: Update locales
+  shell: update-locale LANG=en_US.UTF-8 LC_ALL=en_US.utf8
