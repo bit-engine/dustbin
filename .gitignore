@@ -39,5 +39,6 @@ volumes/*/*
 provision/vault_pass.txt
 
 provision/*.log
-provision/*.retry
+provision/apps/build/*.retry
+provision/apps/prod/*.retry
 .deliver/releases/
