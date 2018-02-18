@@ -14,7 +14,7 @@ defmodule Dustbin.MixProject do
   def application do
     [
       mod: {Dustbin.Application, []},
-      extra_applications: [:logger, :edeliver]
+      extra_applications: [:logger, :edeliver, :observer, :wx]
     ]
   end
 
