@@ -1,6 +1,8 @@
 # Dustbin [![Build Status](https://travis-ci.org/bit-engine/dustbin.svg?branch=master)](https://travis-ci.org/bit-engine/dustbin)
 
 
+![Alt text](art/truck.png?raw=true "Title")
+
 
 Small long running process in charge of notifying residents of certain areas about the upcoming waste collections.
 
