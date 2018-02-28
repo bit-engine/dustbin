@@ -47,7 +47,8 @@ end
 release :dustbin do
   set version: current_version(:dustbin)
   set applications: [
-    :runtime_tools
+    :runtime_tools,
+    :poison
   ]
 end
 
