@@ -20,6 +20,8 @@
       authorized_keys_path:
         - ../../keys/*.pub
     - role: ssh
+    - role: env
+      
   
   handlers:
     - name: Restart SSH
